@@ -22,7 +22,7 @@ need to have it. The obvious question is:
 
 See [![here](/images/logom.jpg "ice-wm.org")](https://ice-wm.org "ice-wm.org").
 
-### Under which operating systems does it run?
+### For which operating systems?
 
 
 IceWM successfully ran under (in alphabetical order):
@@ -37,24 +37,7 @@ IceWM successfully ran under (in alphabetical order):
 - **Solaris**
 
 
-### Minimal Requirements
-
-
-A default IceWM installation just depends on the X11 window system (any X11
-window system will do, no matter how old or from which vendor)  and libXpm
-and therefore should run sufficiently fast even on an old 386, a sparc IPC
-or any other box capable of running X11. For some of the nifty features like
-shaped borders, gradient frames and gradient menus it might help to have a
-computer which is slightly faster or which doesn't have an ancient X11
-version.
-
-### Installation
-
-
-Now you have the IceWM source package at hand and will want to
-install it. So the next question will be:
-
-### How to install IceWM from RPM
+### How to install from RPM?
 
 
 The IceWM developers provide RPM packages for all new releases independently
@@ -64,7 +47,7 @@ Optionaly you can download others like icewm-themes, icewm-l10n and
 icewm-menu-gnome.
 
 
-### How to compile and install IceWM from source?
+### How to compile from source?
 
 
 IceWM  uses the standard
@@ -121,7 +104,7 @@ really want? Obviously not, you want to *run* IceWM. The next
 section describes how to set up IceWM as your default window manager.
 
 
-### How to make IceWM my default window manager?
+### IceWM as default window manager?
 
 
 In order to run IceWM, you must **assure** that the
@@ -150,9 +133,6 @@ Finally I describe what both cases have in common.
 If you use `startx` to start up X then you run
 your window manager from the `.xinitrc` file.
 
-### Running IceWM after graphical login
-
-
 If your system has a graphical login (X is already running while you
 log in) you are using a display manager such as
 `xdm`, `kdm` or
@@ -168,9 +148,6 @@ Mandrake users repeatedly reported that their `.xsession` wasn't read
 and no applications started. To work around that in the `kdm` login
 interface choose `Default` and add IceWM as the last
 entry to your `.xsession`.
-
-### Besides the differences
-
 
 You might have noticed that - besides being  used in different
 cases - `.xsession` and
@@ -234,7 +211,7 @@ immediately or to run in background. Also, don't
 
 
 Beginning with IceWM 1.2.13 there is a binary `icewm-session`.
-This binary helps you to handle all IceWM subparts (icewmbg, icewm, icewmtray, startup, shutdown started in this order).
+This binary helps you to handle all IceWM subparts.
 Therefore you can use `icewm-session` to start IceWM.
 `icewm` now starts only window manager itself.
 
@@ -251,11 +228,6 @@ the default look? Don't worry: This section is on customizing IceWM.
 
 As it is the case with most Linux and Unix programs IceWM can be
 configured using plain text config files.
-
-### You mean I have to edit these files?
-
-There is a lot of utilities nowadays. See utilities section -
-"Tools for IceWM".
 
 The config files need to be changed if you want to change IceWM's
 behavior.  This does not necessarily mean that you have to use an
@@ -290,9 +262,6 @@ edit these copies.
 
 **Note:** You may have to alter the permissions of the copies in
 order to read and write to them.
-
-### The configuration files
-
 
 You can customize IceWM by editing the following configuration files:
 
@@ -451,9 +420,6 @@ Theme=myfavorittheme/default.theme
 #Theme=myfavorittheme/default.theme
 ```
 
-# contains theme history (max. 10 lines).
-
-
 The `theme` file is changed every time you
 switch theme in menu and selected theme is therefore used after IceWM restart.
 
@@ -467,15 +433,7 @@ interpretation and give a user possibility to customize global things he wants t
 have allways the same.
 
 
-### Customizing The Behavior
-
-
-IceWM's reactions on your actions can be pretty much configured as you like
-it. You can choose which focus model you like, what should happen on
-mouse clicks on the titlebars, or which mouse button calls which menu when
-clicked on the desktop.
-
-### What are the focus models good for?
+### What are focus models?
 
 
 To answer this question it is a good idea to first take a look at the
@@ -550,7 +508,7 @@ menu when clicked on an unoccupied region of the desktop.
 `ButtonRaiseMask` determines which buttons will
 raise a window when clicked on that window's title bar.
 
-### Set the mouse button a menu which is bound to
+### Bind menus to mouse buttons
 
 
 There is an option for each of the root menus which controls which
@@ -611,21 +569,7 @@ shows nothing but a black screen).
 The example was chosen on purpose: Using this mode you have the best
 chance of your monitor going asleep (enter power saving mode).
 
-### Can the taskbar applet monitor ethernet (or isdn) instead of my modem?
-
-
-In the `preferences` file just change the option
-`NetworkStatusDevice` to read
-
-```
-    NetworkStatusDevice="eth0"
-```
-
-Replace `"eth0"` by `"ippp0"` to monitor
-ISDN connections. AFAIK eth0 support is limited to Linux and \*BSD since
-commercial Unices tend to use another format for their network interfaces.
-
-### Can the taskbar applet monitor more devices?
+### Can it monitor more devices?
 
 
 In the `preferences` file just change the option
@@ -639,7 +583,7 @@ Replace `"eth0"` by `"eth0 ppp0"` to monitor
 eth0 and ppp0.
 
 
-### I'd like to check remote mailboxes with the taskbar mail applet
+### How to monitor mailboxes?
 
 
 No problem either. Your `MailBoxPath` in the `preferences`
@@ -653,7 +597,7 @@ Replace `imap` with `pop` or `pop3` if necessary. Be sure to have save
 permissions on the preferences file so nobody else can get your mail password.
 
 
-### How do I disable Alt+mouse drag to move the window to send Alt+mouse to application
+### How do I disable Alt keys?
 
 
 To send all Alt+key keys to application you can use window option `window_class.fullKeys: 1`
@@ -661,7 +605,7 @@ However the preference you looking is `ClientWindowMouseActions=0`. This disable
 Alt+mouse drag to move window for all IceWM handled windows.
 
 
-### Control The Look and Behavior Of Applications
+### How to control Applications
 
 
 This section is about how you can make windows appear on a certain
@@ -669,7 +613,7 @@ workspace, have them displayed without a border or titlebar, or put them
 above or under other windows. All this can be accomplished using the
 `winoptions` preferences file, some of it even interactively.
 
-### Assign an option to a given application
+### Assign an option to an application
 
 
 Assigning a particular option (icon, default layer, default
@@ -724,7 +668,7 @@ other windows can be placed: Use the doNotCover option:
 the GNOME panel work. It's a good idea to use this on gkrellm, your icq
 client, or other monitoring tools you'd always like to have in view.
 
-### Have windows iconified/maximized as soon they are mapped
+### Have to iconify or maximize windows when mapped?
 
 
 There may be programs that you either want to start up iconified or
@@ -736,7 +680,7 @@ Fortunately some programs (like Netscape) have a command line option
 to be started iconic and most X program support
 `"-geometry"` to specify a default window size.
 
-### How to make windows appear on certain workspace?
+### How to map windows to a certain workspace?
 
 
 Either use `winoptions` and define
@@ -877,11 +821,12 @@ to a certain desktop. All you have to do is pressing the
     `"Ctrl-Alt-Shift-Cursor_Right"`
 
 
-### Using the CLI (command line interface)
+### Using the command line interface
 
 
 You should run IceWM with `"TaskBarDoubleHeigth=1"`
-because that will enable the CLI (see *"What is the blank bar in the task bar good for?"* for some
+because that will enable the CLI
+(see *"What is the blank bar in the task bar good for?"* for some
 more information).
 
 The CLI is especially useful if you rather frequently need to access
@@ -1525,20 +1470,13 @@ prog "Control Center" "icecc_icon" icecc
 
 Please note that icecc needs some other programs like gvim and python to work properly.
 
-### Tools for IceWM
-
-
 This section is a collection of tools that simplify the usage of
 IceWM. Head on over to the utilities section of the IceWM homepage if you
 want an up to date overview about all available tools.
 
 ### IcePref
 
-
 **Note:** IcePref is a history these day, but you can still find it.
-
-### Description (by the author of IcePref)
-
 
 IcePref is a small graphical utility (written with Python and the Gtk
 toolkit) designed to simplify the configuration of IceWM.
@@ -1557,14 +1495,11 @@ their boxes.
 ### IcePref2
 
 
-IcePref2 is maintained successor to IcePref.
+IcePref2 is a successor to IcePref.
 It is included in *IceWM Control Panel*.
-
-### Description
 
 
 IcePref2 is advanced preferences file editor.
-
 
 
 ### IceME
@@ -1576,9 +1511,6 @@ It is included in *IceWM Control Panel*.
 
 
 ### IceWM Control Panel
-
-### Description (by author of IceWM Control Panel)
-
 
 IceWM Control Panel is the first full-featured, Gtk-based control panel
 for IceWM. It is meant to run in IceWM, but can be used in ANY window
@@ -1596,18 +1528,12 @@ winoptions, icon browser etc.
 
 ### IceWM Control Center
 
-### Description
-
-
 This is Vadim Khohlov's software. A good collection of the configuration
 software for IceWM, include: menu/toolbar editor, Ice Sound Configurator,
 theme Switcher, backgroundoptions editor, IceWM's winoptions editor, keys
 editor.
 
-
 ### IceWMConf
-
-### Description (by the author of IceWMConf)
 
 
 IceWMConf is a small application which helps with configuring IceWM.
@@ -1625,19 +1551,13 @@ own option categories and has an option name search facility. If you
 want a really user friendly configuration tool, I suggest IcePref.
 
 
-
 ### IceWO
-
-### Description
-
 
 IceWO is an icewm's winoption file editor. It allows you to set winoptions
 for any window by clicking on buttons, without manual editing winoptions file.
 
 
 ### IceMC
-
-### Description
 
 
 IceMC is a graphical menu editor for IceWM, designed to be simple and stable.
@@ -1646,9 +1566,6 @@ You can configure your menu entries with copy, paste, and drag'n'drop.
 
 ### MenuMaker
 
-### Description
-
-
 MenuMaker is utility written entirely in Python that scans through the system for
 installed programs and generates menu for specified X window manager.
 It is by far more superior to existing solutions in terms of knowledge base size,
@@ -1656,8 +1573,6 @@ maintainability and extensibility, and has a number of features that have no cou
 in its class. MenuMaker is intended for users of lightweight \*NIX graphical desktop environments.
 
 ### IDesk
-
-### Description
 
 
 iDesk gives users of minimal wm's (fluxbox, pekwm, windowmaker...) icons on
@@ -1669,8 +1584,6 @@ you don't have or dont't want KDE or gnome doing it, you can use idesk.
 
 
 ### DFM
-
-### Description
 
 
 DFM is a file manager for Linux and other UNIX like Operating Systems.
@@ -1797,29 +1710,6 @@ versions of IceWM and GNOME. If it still happens on your machine try to set
 
 in your `winoptions` file.
 
-### The IceWM binaries are very big
-
-
-You might wonder why the IceWM binaries is that big. This is because
-they contain an awful lot of (debugging) symbols. Without them the
-binaries are **much** smaller. The command to remove the symbols
-is `strip:` Go to the directory where IceWM has
-been installed in (typically `/usr/local/bin/)`
-and issue:
-
-```
-    ls -l icewm icewmhint icewmbg icewmtray genpref
-    strip -s icewm icewmhint icewmbg icewmtray genpref
-    ls -l icewm icewmhint icewmbg icewmtray genpref
-```
-
-The `ls` commands are not really needed, but show
-you the (maybe dramatic) change of size of the icewm binaries.
-
-Use `man strip` and `info
-strip` to find out more details about the
-`strip` command.
-
 ### Screen locking doesn't work
 
 
@@ -1838,12 +1728,6 @@ IceWM startup. The proper way is to start "icewm-session" in your
 X startup instead of just icewm.
 See "Configuration".
 
-### Icon tray does not work
-
-
-Problem is nearly same as with background. There is `icewmtray`
-you need to start to activate tray functions. This should implement some docking
-standard used by other applications.
 
 ### IceWM does not respect my font settings
 
@@ -1872,20 +1756,6 @@ X server font are either provided by X server itself e.g. `/etc/X11/XF86Config` 
 or by XFS (X Font Server) defined in. `/etc/X11/fs/config`.
 
 
-### Sources of information
-
-
-This section lists sources of information on the IceWM window
-manager. X applications to use with IceWM have their own section (see
-*Tools for IceWM*).
-
-Additions to the lists are welcome!
-
-**Important Note:** This section is presently being worked on.
-It's not finished and may be rather incomplete. FIXME
-
-
-
 ### License
 
 
@@ -1896,46 +1766,3 @@ This document is released under the terms of the GNU Library General Public Lice
 - Adam Pribyl
 - Markus Ackermann
 - Josef 'Jupp' Schugt
-
-### Recent Changes to this document
-
-
-This section keeps you informed what parts of this document changed recently.
-
-
-- Adam Pribyl, menuprogreload, runonce, win95 key usage, MFAQ about WM_CLASS, removed some refs to icewm.moal.ch, xrandr (thnx Tomas Linden), taskbar can only be increased (fix), how to disable alt+mouse
-- Marko Macek, updates to icewm-session / startup / icewmbg (2005-05-24)
-- Adam Pribyl, alt+drag, winoption .workspace (thnx Oliver Kosmann and Christophe Badoit), font defs explain better, some udates regarding 1.2.14 (2004/06/15)
-- Adam Pribyl, translation howto, Vadims idesk lnk maker add, minor correction. (2004/03/01)
-- Adam Pribyl, font handling problem question and answer. (2004/02/10)
-- Adam Pribyl, startup script section improvements, corrected path in example section (thx to Michael Dipperstein), MFAQ add showdestop
-- Adam Pribyl, added icewm-session to most FAQ; Fulltext advice made more visible;
-  Section Example configuration A-Z added - this is preliminary version - comments welcomed. (2003/10/14)
-- Adam Pribyl, added idesk and dfm links to tools section. icewm-session
-  and prefoverride added. Some small improvements. (2003/09/14)
-- Adam Pribyl, updated Howto prevent IceWM from grabbing keystrokes, with text sent by Marco Molteni.
-  Some more hyperlinking. (2003/09/11)
-- Adam Pribyl, updates to reflect latest icewm development (icewmtray, icewmbg,
-  .icewm/theme). License note add. MenuMaker add. Minor hyperlink and some answers updates. (2003/08/25)
-- Adam Pribyl makes some answers more accurate, added IceMC, bigger icons answer.
-  (2003/05/10)
-- Adam Pribyl updated FAQs to fit nowadays needs, put them on
-  the website and added few new things. (2003/03/29)
-- New maintainer. Markus Ackermann took over and reorganized much of the
-  FAQ. I've even renamed it to "IceWM FAQ and Howto", since that's what it's already
-  been. Moved homepage of the English version.
-  (2001/07/25).
-- Revision of FAQ because some formats (Postscript for example)
-  weren't OK (2000/01/08).
-- Added sections *"Switching Desktop using keyboard"* and
-  *"Moving windows between desktops using keyboard"*
-  (2000/01/08).
-- IceWM homepage has moved, update URL (1999/12/26).
-- This section has been added (1999/10/10).
-- The themes.org site  is up now. This information has been
-  added to "IceWM related web pages"
-  section (1999/10/10).
-- Contact mail address has been changed.  (1999/10/10).
-
-
-
