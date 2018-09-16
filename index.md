@@ -104,7 +104,7 @@ really want? Obviously not, you want to *run* IceWM. The next
 section describes how to set up IceWM as your default window manager.
 
 
-### As default window manager?
+### Default window manager?
 
 
 In order to run IceWM, you must **assure** that the
@@ -565,7 +565,7 @@ shows nothing but a black screen).
 The example was chosen on purpose: Using this mode you have the best
 chance of your monitor going asleep (enter power saving mode).
 
-### Can it monitor more devices?
+### Monitor more devices?
 
 
 In the `preferences` file just change the option
@@ -579,7 +579,7 @@ Replace `"eth0"` by `"eth0 ppp0"` to monitor
 eth0 and ppp0.
 
 
-### How to monitor mailboxes?
+### Monitor mailboxes?
 
 
 No problem either. Your `MailBoxPath` in the `preferences`
@@ -593,7 +593,7 @@ Replace `imap` with `pop` or `pop3` if necessary. Be sure to have save
 permissions on the preferences file so nobody else can get your mail password.
 
 
-### How do I disable Alt keys?
+### Disable the Alt keys?
 
 
 To send all Alt+key keys to application you can use window option `window_class.fullKeys: 1`
@@ -601,7 +601,7 @@ However the preference you looking is `ClientWindowMouseActions=0`. This disable
 Alt+mouse drag to move window for all IceWM handled windows.
 
 
-### How to control Applications
+### Control Applications
 
 
 This section is about how you can make windows appear on a certain
@@ -650,7 +650,7 @@ of winoptions you can find in the [manual](/manual/)
  chapter about Window Options.
 
 
-### How to keep a window on top?
+### Keep window on top?
 
 
 There are two slightly different ways to do this. Use whatever suits your
@@ -662,7 +662,7 @@ other windows can be placed: Use the doNotCover option:
 the GNOME panel work. It's a good idea to use this on gkrellm, your icq
 client, or other monitoring tools you'd always like to have in view.
 
-### Iconify or maximize on map?
+### Iconify or maximize?
 
 
 There may be programs that you either want to start up iconified or
@@ -674,7 +674,7 @@ Fortunately some programs (like Netscape) have a command line option
 to be started iconic and most X program support
 `"-geometry"` to specify a default window size.
 
-### Map windows to a workspace?
+### Map to a workspace?
 
 
 Either use `winoptions` and define
@@ -697,14 +697,11 @@ icesh -class xeyes setWorkspace 0
 This move xeyes to my workspace 0.
 
 
-### Using IceWM With The Keyboard
-
+### Basic keyboard shortcuts
 
 It should be possible to control everything by keyboard. Here we show some
 of the not so obvious ways to achieve important window managing tasks only
 with keystrokes.
-
-### Basic keyboard shortcuts
 
 
 ```
@@ -1102,10 +1099,10 @@ There is documentation on [themes](/themes/)
 written by MJ Ray and update by Adam Pribyl.
 
 
-### What is Logout(Cancel) Command?
+### What is Logout Command?
 
 
-For most users, nothing. Both commands were meant for GNOME
+For most users, nothing. The Logout and Cancel commands were meant for GNOME
 integration as alternative commands that would be run when users
 initiated a logout or logout cancel. Since GNOME did not seem to
 incorporate this feature, they generally go unused.
@@ -1128,7 +1125,7 @@ If you enter a non-X command and press
 `"Ctrl-Enter"` an that command is being executed in
 an XTerm.
 
-### How to keep IceWM from grabbing keystrokes
+### Stop grabbing my keystrokes
 
 
 What if you are running an application and need to use a keystroke
