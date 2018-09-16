@@ -10,7 +10,7 @@ title: IceWM FAQ and Howto
 
 ### Last modified
 
-2018/09/14
+2018/09/16
 
 
 ### General FAQ - ReadMeFirst
@@ -65,7 +65,7 @@ need to have it. The obvious question is:
 
 ### Where to get it?
 
-See [![here](/images/logo.jpg "logo")](/ "here").
+See [![here](/images/logom.jpg "ice-wm.org")](https://ice-wm.org "ice-wm.org").
 
 ### Under which operating systems does it run?
 
@@ -1410,10 +1410,12 @@ To change the height of frames you have to make theme with higher frames.
 
 ### How can I translate IceWM into my language?
 
+The best option is to join
+[openSUSE Weblate](https://l10n.opensuse.org/projects/icewm/icewm-1-4-branch/).
 
-Create a copy of `icewm.pot` and rename it to
+
+The other option is to create a copy of `icewm.pot` and rename it to
 `cs.po` or whatever is right for your language.
-
 Then you have to translate the file using any of the tools for
 gettext file transaltion, e.g. kbabel, or you can edit it by hand.
 After translation you can send it to icewm-devel list or post it
