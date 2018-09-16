@@ -22,7 +22,7 @@ need to have it. The obvious question is:
 
 See [![here](/images/logom.jpg "ice-wm.org")](https://ice-wm.org "ice-wm.org").
 
-### For which operating systems?
+### Which operating systems?
 
 
 IceWM successfully ran under (in alphabetical order):
@@ -47,7 +47,7 @@ Optionaly you can download others like icewm-themes, icewm-l10n and
 icewm-menu-gnome.
 
 
-### How to compile from source?
+### Compile from source?
 
 
 IceWM  uses the standard
@@ -104,7 +104,7 @@ really want? Obviously not, you want to *run* IceWM. The next
 section describes how to set up IceWM as your default window manager.
 
 
-### IceWM as default window manager?
+### As default window manager?
 
 
 In order to run IceWM, you must **assure** that the
@@ -127,7 +127,7 @@ address the case "X is running all the time" (which means
 that you log in via `xdm` or something like that).
 Finally I describe what both cases have in common.
 
-### Running IceWM at X startup
+### IceWM at X11 startup?
 
 
 If you use `startx` to start up X then you run
@@ -240,7 +240,7 @@ To notify IceWM about the
 changes you've made just send it a SIGHUP or restart it from the Logout
 menu.
 
-### Where are the configuration files?
+### Which configuration files?
 
 
 You could not find the config files? Maybe you were looking in wrong
@@ -285,7 +285,7 @@ You can customize IceWM by editing the following configuration files:
     To override theme preferences.
 
 
-### menu
+#### menu
 
 
 The `menu` file controls the contents in your menu (You knew that,
@@ -358,7 +358,7 @@ fi
 Some more can be found in patch 993038 in IceWM patch tracker.
 
 
-### preferences
+#### preferences
 
 
 The `preferences` file is the main configuration file. The default
@@ -366,13 +366,13 @@ file is pretty much self documenting, so go and have a look. In case you
 ever wondered about themes: they can define all the options you can use in
 this file - and their definitions **override** all your personal customization!
 
-### keys
+#### keys
 
 
 In the `keys` file one can define shortcuts for starting programs.
 The existing entries make clear what one has to define.
 
-### toolbar
+#### toolbar
 
 
 The `toolbar` file defines some buttons which can be clicked next to
@@ -380,14 +380,14 @@ the menu in the toolbar. It uses the same format as the menu file.
 You can also have folders in the toolbar. The easiest way to do that
 is simply by copying a menu from the /menu file over to the /toolbar file.
 
-### winoptions
+#### winoptions
 
 
 The `winoptions` file can be used to define the appearance of X
 applications like on which desktop they should appear, if should have a
 border, menu, titlebar, etc.
 
-### startup
+#### startup
 
 
 The `startup` is a script (must be executable) that is executed by
@@ -410,7 +410,7 @@ to execute the script.
 
 Also make sure all applications are starting at background (&).
 
-### theme
+#### theme
 
 
 The `theme` file is new from IceWM 1.2.10. It specifies which
@@ -423,7 +423,7 @@ Theme=myfavorittheme/default.theme
 The `theme` file is changed every time you
 switch theme in menu and selected theme is therefore used after IceWM restart.
 
-### prefoverride
+#### prefoverride
 
 
 The `prefoverride` file is new from IceWM 1.2.12. In this file you can
@@ -467,18 +467,14 @@ to that window.
 **In short:** The focus model controls what you have to do to
 make a window pop up and to have it listen to what you type.
 
-### Use UseRootButtons and ButtonRaiseMask
+### Configure mouse buttons
 
 
-`UseRootButtons` and
-`ButtonRaiseMask` are so called **bitmask
-options.**
+`UseRootButtons` and `ButtonRaiseMask` are so called **bitmask options.**
 
-This concept is e.g. used by `chmod` where
-`"4"` stands for read access, `"2"`
-for write access and `"1"` for execute (or change
-directory) access and you add up the relevant numbers to control the
-file access.
+This concept is e.g. used by `chmod` where `"4"` stands for read access,
+`"2"` for write access and `"1"` for execute (or change directory)
+access and you add up the relevant numbers to control the file access.
 
 As far as `UseRootButtons` and
 `ButtonRaiseMask` are concerned,
@@ -508,7 +504,7 @@ menu when clicked on an unoccupied region of the desktop.
 `ButtonRaiseMask` determines which buttons will
 raise a window when clicked on that window's title bar.
 
-### Bind menus to mouse buttons
+### Bind menus to buttons
 
 
 There is an option for each of the root menus which controls which
@@ -613,8 +609,6 @@ workspace, have them displayed without a border or titlebar, or put them
 above or under other windows. All this can be accomplished using the
 `winoptions` preferences file, some of it even interactively.
 
-### Assign an option to an application
-
 
 Assigning a particular option (icon, default layer, default
 workspace, etc.) to a given application or application window can be
@@ -656,7 +650,7 @@ of winoptions you can find in the [manual](/manual/)
  chapter about Window Options.
 
 
-### How do I make a window stay on top?
+### How to keep a window on top?
 
 
 There are two slightly different ways to do this. Use whatever suits your
@@ -668,7 +662,7 @@ other windows can be placed: Use the doNotCover option:
 the GNOME panel work. It's a good idea to use this on gkrellm, your icq
 client, or other monitoring tools you'd always like to have in view.
 
-### Have to iconify or maximize windows when mapped?
+### Iconify or maximize on map?
 
 
 There may be programs that you either want to start up iconified or
@@ -680,7 +674,7 @@ Fortunately some programs (like Netscape) have a command line option
 to be started iconic and most X program support
 `"-geometry"` to specify a default window size.
 
-### How to map windows to a certain workspace?
+### Map windows to a workspace?
 
 
 Either use `winoptions` and define
@@ -710,7 +704,7 @@ It should be possible to control everything by keyboard. Here we show some
 of the not so obvious ways to achieve important window managing tasks only
 with keystrokes.
 
-### Basic predefined keyboard shortcuts
+### Basic keyboard shortcuts
 
 
 ```
@@ -728,7 +722,7 @@ Ctrl-Esc = Opens the  menu
 ```
 
 
-### Switching Desktop using keyboard
+### Switch Desktop by keyboard
 
 
 You are accustomed to a window manager that allows you to switch
@@ -803,7 +797,7 @@ EdgeSwitch=1
 then you can change workspaces automatically by moving your cursor to the left/right edges of your screen.
 
 
-### Moving windows between desktops using keyboard
+### Moving windows between desktops
 
 
 In the previous section I explained how to switch between desktops.
@@ -821,7 +815,7 @@ to a certain desktop. All you have to do is pressing the
     `"Ctrl-Alt-Shift-Cursor_Right"`
 
 
-### Using the command line interface
+### Command Line Interface
 
 
 You should run IceWM with `"TaskBarDoubleHeigth=1"`
@@ -864,7 +858,7 @@ will close (you can use `"Ctrl-C"` to abort the
 `sleep` command before that time went by).
 
 
-### May I use Win(95) keys with IceWM?
+### Can I use Win(95) keys?
 
 
 Sure you can. Josef Oswald reported:
@@ -907,16 +901,14 @@ menu without needing to leave the keyboard,  my preferred way of working
 on the pc.
 
 
-
-
-### Customizing The Look Through Themes
+### How to install Themes
 
 
 IceWM can be customized using a great variety of themes. You can download them
 usually as .tar.gz archives on the net.
 To install themes simply unpack them into your `~/.icewm/themes/` directory.
 
-### What image formats can I use with IceWM?
+### Which image formats?
 
 
 If IceWM is compiled with the standard xpm libraries, then it can
@@ -924,7 +916,7 @@ only employ xpm images (as backgrounds, etc.). If, however, IceWM is
 compiled with `imlib` support, it can display all
 common image formats including jpeg, gif, png, and tiff.
 
-### Setting background color/image
+### Setting the background
 
 
 If you provide the appropriate options in your
@@ -1091,7 +1083,7 @@ on my machine with hardware clock and Linux running UTC, local being
     A literal "%" character.
 
 
-### I have more icons to add
+### How to add icons?
 
 
 You can either copy them to systemwide `icons` directory or you can copy
@@ -1103,20 +1095,14 @@ IconPath="/home/username/.icewm/myicons:/usr/share/pixmaps"
 from preferences file. Remember that the new path you are adding must be seperated with a colon (:).
 
 
-### How to learn making themes for IceWM?
+### How make themes?
 
 
 There is documentation on [themes](/themes/)
 written by MJ Ray and update by Adam Pribyl.
 
 
-### Miscellaneous Questions
-
-
-This section is a collection of questions on subjects that go beyond
-simply **using** IceWM.
-
-### What does Logout(Cancel) Command do?
+### What is Logout(Cancel) Command?
 
 
 For most users, nothing. Both commands were meant for GNOME
@@ -1124,7 +1110,7 @@ integration as alternative commands that would be run when users
 initiated a logout or logout cancel. Since GNOME did not seem to
 incorporate this feature, they generally go unused.
 
-### What is the blank field in the task bar good for?
+### A blank field in taskbar?
 
 
 If you are running IceWM with the
@@ -1247,12 +1233,12 @@ idea: Screen locking is often done in a hurry and if you have to scan
 through a menu this will increase the chance that you will not lock
 your machine at all.
 
-### ... using a lock command other than xlock
+### ... using a lock command
 
 
 How to define a different lock command is described in section "Setting the lock command"
 
-### Does IceWM support session management?
+### Support session management?
 
 
 From 1.2.13 IceWM has some basic session management to manage all its parts.
@@ -1271,7 +1257,7 @@ MIME types, file endings and such. IceWM users usually use idesk, dfm, rox, kfm 
 where idesk, dfm and rox are better suited for work on smaller (older) machines than the
 other two.
 
-### Why doesn't IceWM accept my background image/color?
+### My background is ignored?
 
 Usually this is because it's the wrong image format. It can happen when
 IceWM is compiled only with libXpm.
@@ -1279,7 +1265,7 @@ With imlib, IceWM is able to read most of the often used image
 formats like png, gif, jpeg, instead of just xpm images with libXpm. Another
 reason can be, that the theme defines another image or color.
 
-### Can I have bigger icons in menu, taskbar, quickswitch etc.?
+### Can I have bigger icons?
 
 From IceWM 1.2.14 it is possible to specify size of icons in IceWM preferences.
 There are four relevant options:
@@ -1307,7 +1293,7 @@ folder is 50x32 then your taskbar will be 32 pixels high.
 To change the height of frames you have to make theme with higher frames.
 
 
-### How can I translate IceWM into my language?
+### How to translate IceWM?
 
 The best option is to join
 [openSUSE Weblate](https://l10n.opensuse.org/projects/icewm/icewm-1-4-branch/).
@@ -1327,8 +1313,7 @@ into `po` directory under IceWM sources and then configure IceWM
 This creates .mo file, which you can either copy to locale locations
 (e.g. /usr/local/share/locale/cs/LC_MESSAGES) or you can do `make install`.
 
-### How to use Xrandr with IceWM?
-
+### How to use Xrandr?
 
 IceWM supports since a few versions the xrandr feature of X11. This can
 very easily be used to define a menu item on your toolbar to change the
@@ -1399,8 +1384,6 @@ then you need to do following things:
 To configure all of IceWM options go to sections about configuration.
 Generally all you need to customize IceWM globaly, is to edit `/usr/local/share/icewm/preferences` etc.
 
-### Additional applications
-
 ### Icons on desktop
 
 Usually people want to have icons on desktop. One of most simple applications that can
@@ -1451,10 +1434,6 @@ end
 ```
 idesk > /dev/null & # start idesk - desktop icon manager
 ```
-
-
-
-
 
 
 ### Control tools
@@ -1597,7 +1576,7 @@ capability to place icons on the root window.
 This section is for problems that are intrinsic to the philosophy of
 IceWM or that are caused by bugs.
 
-### IceWM ignores my color settings
+### IceWM ignores my colors
 
 
 Some users wonder why the colors specified in their preference files
@@ -1629,7 +1608,7 @@ command displays
 
 you are running X in n-bit mode (n typically is 8, 16, 24 or 32).
 
-### Programs are missing in the menus
+### Programs are missing from menus
 
 
 A very annoying problem are programs you added to the
@@ -1729,7 +1708,7 @@ X startup instead of just icewm.
 See "Configuration".
 
 
-### IceWM does not respect my font settings
+### Font settings are ignored
 
 
 IceWM uses two ways of font handling - corefonts OR fonts provided by xfreetype library.
@@ -1759,7 +1738,8 @@ or by XFS (X Font Server) defined in. `/etc/X11/fs/config`.
 ### License
 
 
-This document is released under the terms of the GNU Library General Public License.
+This document is released under the terms of
+the GNU Library General Public License.
 
 ### Authors
 
