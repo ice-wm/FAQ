@@ -2,62 +2,17 @@
 title: IceWM FAQ and Howto
 ---
 
-### Authors
-- Adam Pribyl
-- Markus Ackermann
-- Josef 'Jupp' Schugt
-
-
-### Last modified
-
-2018/09/16
-
-
-### General FAQ - ReadMeFirst
-
-
-As IceWM is lightweight it still does a lot. **If you are looking for
-some option go throught *preferences* file.** It is well constructed
-and you usually find what you are searching - e.g. you want to change some
-quickswitch option then try to grep "QuickSwitch" from preferences.
-Therefore it makes no sense to describe all of the preferences here.
-
-### The most Frequently Asked Questions with short answers
-
-
-This is list of the most frequently asked quiestions with short answers.
-Usually you can find more explaining answer in following chapers.
-
-### IceWM does not start icewmbg, startup etc. How should I start IceWM? "icewm-session"
-### Is that possible to place icons on desktop using PURE IceWM? "No."
-### Where are icewm files? "Depends - locate *icewm."
-### How to change default theme? ".icewm/theme", Theme="thenicest/default.theme".
-### Does IceWM knows dynamicly created desktops or 2D desktops? No.
-### Is there a way to group similar applications in the toolbar when minimized? No.
-### How can I disable the taskbar (or toolbar) in IceWM? preferences, ShowTaskBar=0
-### Is there any way to have the time and date show in the taskbar? "Yes. man date || strftime"
-### Is there a button to minimize all windows?  IceWM > 1.2.13, preferences, TaskBarShowShowDesktopButton=1 or use alt+shift+F9.
-### How can I autostart apps at X && IceWM start? Use .Xsession || .xinitrc || .Xclients || ".icewm/startup."
-### Is it possible to add submenus to the menu? "Yes. file menu; format: menu name icon {content}."
-### How to disable Alt+drag feature? preferences, ClientWindowMouseActions=0
-### How is that with WM_CLASS and windowptions? "This doc should reflect correct status."
-
-### Introduction
-
-
-In this section I give a short description of what IceWM is.
+Last modified 2018/09/16
 
 ### What is IceWM?
 
-
-IceWM is a **window manager for** the **X** window system.
+IceWM is a **window manager** for the **X11** window system.
 It is designed to be **small, fast, lightweight,** and to
 emulate the **look and feel of Motif, OS/2 and Windows.**
 
-While it is **very configurable,** it is not pathologically so
-(like Enlightenment or FVWM). In short, IceWM provides a
-**customizable look** with a relatively **consistent
-feel.**
+While it is **very configurable,** it is not pathologically so.
+In short, IceWM provides a **customizable look**
+with a relatively **consistent feel.**
 
 Now that you know what IceWM is and are still reading on you are
 obviously interested in using it. To use a program you will first
@@ -73,11 +28,10 @@ See [![here](/images/logom.jpg "ice-wm.org")](https://ice-wm.org "ice-wm.org").
 IceWM successfully ran under (in alphabetical order):
 
 
-- **AIX 4.3.3**
-- **Digital Unix (Compaq Tru64 Unix)**
+- **AIX**
+- **Digital Unix**
 - **FreeBSD**
-- **Linux on DEC Alpha (64 bit architecture)**
-- **Linux on Intel compatibles (32 bit architecture)**
+- **Linux**
 - **NetBSD**
 - **OpenBSD**
 - **Solaris**
@@ -86,12 +40,12 @@ IceWM successfully ran under (in alphabetical order):
 ### Minimal Requirements
 
 
-A default IceWM installation just depends on the X window system (any X
+A default IceWM installation just depends on the X11 window system (any X11
 window system will do, no matter how old or from which vendor)  and libXpm
 and therefore should run sufficiently fast even on an old 386, a sparc IPC
-or any other box capable of running X. For some of the nifty features like
+or any other box capable of running X11. For some of the nifty features like
 shaped borders, gradient frames and gradient menus it might help to have a
-computer which is slightly faster or which doesn't have an ancient X
+computer which is slightly faster or which doesn't have an ancient X11
 version.
 
 ### Installation
@@ -1930,13 +1884,18 @@ Additions to the lists are welcome!
 **Important Note:** This section is presently being worked on.
 It's not finished and may be rather incomplete. FIXME
 
-### web pages
 
 
 ### License
 
 
 This document is released under the terms of the GNU Library General Public License.
+
+### Authors
+
+- Adam Pribyl
+- Markus Ackermann
+- Josef 'Jupp' Schugt
 
 ### Recent Changes to this document
 
