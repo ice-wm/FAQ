@@ -719,7 +719,7 @@ Ctrl-Esc = Opens the  menu
 ```
 
 
-### Switch Desktop by keyboard
+### Switch Desktop by key
 
 
 You are accustomed to a window manager that allows you to switch
@@ -794,7 +794,7 @@ EdgeSwitch=1
 then you can change workspaces automatically by moving your cursor to the left/right edges of your screen.
 
 
-### Moving windows between desktops
+### Move windows to desktops
 
 
 In the previous section I explained how to switch between desktops.
