@@ -2,7 +2,7 @@
 title: IceWM FAQ and Howto
 ---
 
-Last modified 2018/09/16
+Last modified 2019/11/24
 
 ### What is IceWM?
 
@@ -57,13 +57,13 @@ installation of any other package that uses this tool.
 First you **untar** the package using
 
 ```
-    tar xzf icewm-1.4.x.tar.gz
+    tar xzf icewm-1.6.x.tar.gz
 ```
 
 then you **change** to the created **directory** using
 
 ```
-    cd icewm-1.4.x
+    cd icewm-1.6.x
 ```
 
 IceWM comes with a configure script that can be supplied with several
@@ -1083,23 +1083,28 @@ on my machine with hardware clock and Linux running UTC, local being
 ### How to add icons?
 
 
-You can either copy them to systemwide `icons` directory or you can copy
-them to `~/.icewm/icons` or you can use option
+An icon for an application can be specified by a name,
+filename, full path or path prefix in `winoptions`.
+To locate an icon which is specified by name or filename,
+IceWM looks at the value of IconPath in `preferences`.
+This is colon-separated list of directories.
+A directory is subjected to tilde expansion and expansion
+of at most one leading environment variable like `$HOME`.
+If the icon is still not found sofar, then IceWM looks
+for icons in `$ICEWM_PRIVCFG/icons/` (or `$HOME/.config/icewm/icons/,
+or `$HOME/.icewm/icons/`), then at theme icons,
+then at CFGDIR/icons, then at LIBDIR/icons.
+Here CFGDIR and LIBDIR are defined at compile time
+and can be queried by `icewm --directories`.
 
-```
-IconPath="/home/username/.icewm/myicons:/usr/share/pixmaps"
-```
-from preferences file. Remember that the new path you are adding must be seperated with a colon (:).
-
-
-### How make themes?
+### How to make themes?
 
 
 There is documentation on [themes](/themes/)
 written by MJ Ray and update by Adam Pribyl.
 
 
-### What is Logout Command?
+### What is the Logout Command?
 
 
 For most users, nothing. The Logout and Cancel commands were meant for GNOME
