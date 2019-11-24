@@ -1091,7 +1091,7 @@ This is colon-separated list of directories.
 A directory is subjected to tilde expansion and expansion
 of at most one leading environment variable like `$HOME`.
 If the icon is still not found sofar, then IceWM looks
-for icons in `$ICEWM_PRIVCFG/icons/` (or `$HOME/.config/icewm/icons/,
+for icons in `$ICEWM_PRIVCFG/icons/` (or `$HOME/.config/icewm/icons/`,
 or `$HOME/.icewm/icons/`), then at theme icons,
 then at CFGDIR/icons, then at LIBDIR/icons.
 Here CFGDIR and LIBDIR are defined at compile time
