@@ -2,16 +2,14 @@
 title: IceWM FAQ and Howto
 ---
 
-Last modified 2019/11/24
+Last modified 2020/03/21
 
 ### What is IceWM?
 
 IceWM is a **window manager** for the **X11** window system.
 It is designed to be **small, fast, lightweight,** and to
 emulate the **look and feel of Motif, OS/2 and Windows.**
-
-While it is **very configurable,** it is not pathologically so.
-In short, IceWM provides a **customizable look**
+It is **very configurable**: it provides a **customizable look**
 with a relatively **consistent feel.**
 
 Now that you know what IceWM is and are still reading on you are
@@ -24,266 +22,81 @@ See [![here](/images/logom.jpg "ice-wm.org")](https://ice-wm.org "ice-wm.org").
 
 ### Which operating systems?
 
+IceWM runs under:
 
-IceWM successfully ran under (in alphabetical order):
-
-
-- **AIX**
-- **Digital Unix**
-- **FreeBSD**
 - **Linux**
 - **NetBSD**
+- **FreeBSD**
 - **OpenBSD**
-- **Solaris**
-
 
 ### How to install from RPM?
 
-
-The IceWM developers provide RPM packages for all new releases independently
-from the distributions which use this package format. IceWM's RPM
-distribution is split into several files. You need icewm-x.y.z-v.rpm.
-Optionaly you can download others like icewm-themes, icewm-l10n and
-icewm-menu-gnome.
-
+See [repology](https://repology.org/project/icewm/versions)
+or [pkgs](https://pkgs.org/download/icewm).
 
 ### Compile from source?
 
-
-IceWM  uses the standard
-GNU autoconf tool, so installation of IceWM is much the same as the
-installation of any other package that uses this tool.
-
-First you **untar** the package using
-
-```
-    tar xzf icewm-1.6.x.tar.gz
-```
-
-then you **change** to the created **directory** using
-
-```
-    cd icewm-1.6.x
-```
-
-IceWM comes with a configure script that can be supplied with several
-compile-time options. To see them listed use
-
-```
-    ./configure --help
-```
-
-After you have decided which (if any) options you want to set,
-**run** the `configure` script:
-
-```
-    ./configure [option ...]
-```
-
-Assuming that the configure script exited successfully, you should
-then **compile** IceWM using
-
-```
-    make
-```
-
-which will build IceWM with the options specified by the configure
-script. If everything compiles successfully, you can now
-**install** IceWM on your machine by entering
-
-```
-    make install
-```
-
-**Note:** To do so you will typically need to become
-**root** (at least if you didn't supply an install directory you
-as a user have write access to - this you can change in Makefile).
-
-Now you have an IceWM binary sitting on your disk. Is that what you
-really want? Obviously not, you want to *run* IceWM. The next
-section describes how to set up IceWM as your default window manager.
-
+IceWM provides **autoconf** and **CMake**.
+See [README](https://github.com/ice-wm/icewm/blob/master/README.md) or
+[INSTALL-cmakebuild](https://github.com/ice-wm/icewm/blob/master/INSTALL-cmakebuild.md).
 
 ### Default window manager?
 
+In order to run IceWM, assure that the `icewm` and `icewm-session`
+are in your `PATH`. Then add this to your `~/.xinitrc`:
 
-In order to run IceWM, you must **assure** that the
-**executable** (called `icewm`) **is
-in** your **path.** You should then **add IceWM to**
-your **X start-up script** (which could be
-`.xinitrc`, `.xsession` or
-`.Xclients`).
-
-**Note:** Supplying the full path to IceWM isn't sufficient - if
-IceWM isn't in your path, restarting it will fail (even if you don't do
-this by hand it is done automatically on changing the theme).
-
-Which of the scripts mentioned above is the right one mainly depends
-on whether you manually start X (using `startx`)
-or have X running all the time.
-
-First I explain what you need to do if you manually start X. Then I
-address the case "X is running all the time" (which means
-that you log in via `xdm` or something like that).
-Finally I describe what both cases have in common.
-
-### IceWM at X11 startup?
-
-
-If you use `startx` to start up X then you run
-your window manager from the `.xinitrc` file.
-
-If your system has a graphical login (X is already running while you
-log in) you are using a display manager such as
-`xdm`, `kdm` or
-`gdm`. In this case `.xinitrc`
-has no effect (it is not read in by `xdm`). You
-must instead use a `.xsession` file.
-
-**Hint:** It is absolutely no problem to have a
-`.xsession` and a `.xinitrc`
-file (which is especially useful for inhomogeneous networks).
-
-Mandrake users repeatedly reported that their `.xsession` wasn't read
-and no applications started. To work around that in the `kdm` login
-interface choose `Default` and add IceWM as the last
-entry to your `.xsession`.
-
-You might have noticed that - besides being  used in different
-cases - `.xsession` and
-`.xinitrc` are essentially the same. On some
-systems they are in fact the very same file which is called
-`.Xclients` with `.xinitrc` and
-`.xsession` both being symbolic links to this
-file.
-
-Irrespective which start script you use (`.xsession`,
-`.xinitrc` or `.Xclients`) it must
-be executable. This may be achieved by issuing the following command:
-
-```
-    chmod u+x ~/.filename
+```bash
+    #!/bin/bash
+    icewm-session
 ```
 
-A minimalist's start-up file consists of only the command to start
-the window manager (in our case `icewm`). Most geeky people
-add other stuff to the file to make it look more complicated and
-confuse beginners.
+Also do `chmod +x ~/.xinitrc`.
 
-Though that may be the reason for some of us, the greater majority
-add commands to customize X and to start some programs on login
-(typical example: an `xterm`)
+Then you can start `X11` with `startx`, or select `icewm-session`
+in your display manager settings when you login. Check that
+`icewm-session.desktop` can be found using `locate icewm-session.desktop`.
+Maybe try the 
+[icewm-set-gnomewm](https://ice-wm.org/man/icewm-set-gnomewm)
+command to make icewm your default under a GNOME environment.
 
-The following is a (reasonable) `.xinitrc` file
-used as an example by Marko:
-
-```
-    #-----------------------------------------------------------
-    # .xinitrc
-    #-----------------------------------------------------------
-
-    # run profile to set $PATH and other env vars correctly
-    . $HOME/.bash_profile
-
-    # setup background
-    xsetroot -solid '#056'
-
-    # setup mouse acceleration
-    xset m 7 2
-
-    # run initial programs
-    xterm &
-
-    # start icewm, and run xterm if it crashes (just to be safe)
-    exec icewm || exec xterm -fg red
-
-    #-----------------------------------------------------------
-```
-
-**Note:** To run IceWM, the `icewm` command
-needs to be executed. This means that all programs that are run
-before starting `icewm` either have to terminate
-immediately or to run in background. Also, don't
-`exec` them because that terminates execution of
-`.xinitrc.`
-
-### IceWM Session
-
-
-Beginning with IceWM 1.2.13 there is a binary `icewm-session`.
-This binary helps you to handle all IceWM subparts.
-Therefore you can use `icewm-session` to start IceWM.
-`icewm` now starts only window manager itself.
-
-
-If you want to start only some parts of the IceWM, then you can add them to
-your `.xsession` or similar file before `exec icewm`, otherwise it is
-enough to use only `exec icewm-session`.
+You can add further startup commands to
+[your startup file](https://ice-wm.org/man/icewm-startup)
 
 ### Configuration
 
+When you are runnign IceWM you can switch themes via the
+**Start Menu button** in the bottom left corner.
+Some options can be changed on the fly via the **Preferences Menu**.
+Don't forget to select **Save Modifications**. Most options
+require a restart of icewm to be effective via
+**Logout -> Restart IceWM**.
 
-Congratulations! Now you have IceWM up and running. You don't like
-the default look? Don't worry: This section is on customizing IceWM.
-
-As it is the case with most Linux and Unix programs IceWM can be
-configured using plain text config files.
-
-The config files need to be changed if you want to change IceWM's
-behavior.  This does not necessarily mean that you have to use an
-editor for this - graphical configuration tools for IceWM are
-available, although IceWM doesn't feature in-built configuration. More
-about these tools in the Utilities section.
-Still hand editing of these files is most effective and you can find even more
-than you are looking for.
-To notify IceWM about the
-changes you've made just send it a SIGHUP or restart it from the Logout
-menu.
-
-### Which configuration files?
-
-
-You could not find the config files? Maybe you were looking in wrong
-places - the location depends upon the method you used to install
-IceWM.
-
-In a plain vanilla source install, the global version of the files
-will be located in `/usr/local/share/icewm`. If
-you installed the standard RPM, they will be in
-`/usr/X11R6/lib/X11/icewm/` or `/usr/local/lib/Xll/icewm/`. The system wide
-configuration files for the Debian package seem to be in
-`/etc/X11/icewm/`. Generaly you can try to use `locate icewm` command to find parts of IceWM.
-
-However, if you wish to make a configuration of your own you should
-not edit these global config files but create a subdirectory of your
-home directory called `~/.icewm/`. Copy the system
-wide files to your local `.icewm` directory and
-edit these copies.
-
-**Note:** You may have to alter the permissions of the copies in
-order to read and write to them.
+Configuring IceWM usually requires editing text config files.
+See the [icewm](https://ice-wm.org/man/icewm) and
+[preferences](https://ice-wm.org/man/icewm-preferences) man pages.
 
 You can customize IceWM by editing the following configuration files:
 
-- `"menu"`
-    Controls the contents of the `start` menu
-- `"preferences"`
-    Controls the general behavior of IceWM
-- `"keys"`
-    Controls which additional key combos are available to users
-- `"toolbar"`
+- [menu](https://ice-wm.org/man/icewm-menu)
+    Controls the contents of the `start` menu.
+- [preferences](https://ice-wm.org/man/icewm-preferences)
+    Controls the general behavior of IceWM.
+- [keys](https://ice-wm.org/man/icewm-keys)
+    Controls which additional key combos are available to users.
+- [toolbar](https://ice-wm.org/man/icewm-toolbar)
     Controls the row of launcher icons on the taskbar and has the
-    same syntax as the menu file
-- `"winoptions"`
+    same syntax as the menu file.
+- [winoptions](https://ice-wm.org/man/icewm-winoptions)
     Controls the behavior of individual applications (as identified
-    by the names of their respective windows)
-- `"startup"`
-    Script or command (must be executable) executed by `icewm-session` on startup
-- `"theme"`
+    by the names of their respective windows).
+- [startup](https://ice-wm.org/man/icewm-startup)
+    Script or command (must be executable) executed by `icewm-session` on startup.
+- [shutdown](https://ice-wm.org/man/icewm-shutdown)
+    Script or command (must be executable) executed by `icewm-session` on shutdown.
+- [theme](https://ice-wm.org/man/icewm-theme)
     IceWM theme path/name.
-- `"prefoverride"`
+- [prefoverride](https://ice-wm.org/man/icewm-prefoverride)
     To override theme preferences.
-
 
 #### menu
 
