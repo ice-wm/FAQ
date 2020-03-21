@@ -167,12 +167,6 @@ to that window.
 
 IceWM implements these focus models:
 
-0. custom : Is configured by the following ten options
-   in the preferences file: "ClickToFocus", "FocusOnAppRaise",
-   "RequestFocusOnAppRaise", "RaiseOnFocus", "RaiseOnClickClient",
-   "FocusChangesWorkspace", "FocusOnMap", "FocusOnMapTransient",
-   "FocusOnMapTransientActive", "MapInactiveOnTop"
-
 1. click : changing input focus requires to click a window with
    the left mouse button.
 
@@ -185,6 +179,12 @@ IceWM implements these focus models:
    even if new applications become mapped.
 
 5. quiet : like sloppy, but without flashing if something wants focus.
+
+6. custom : Is configured by the following ten options
+   in the preferences file: "ClickToFocus", "FocusOnAppRaise",
+   "RequestFocusOnAppRaise", "RaiseOnFocus", "RaiseOnClickClient",
+   "FocusChangesWorkspace", "FocusOnMap", "FocusOnMapTransient",
+   "FocusOnMapTransientActive", "MapInactiveOnTop"
 
 **In short:** The focus model controls what you have to do to
 make a window pop up and to have it listen to what you type.
