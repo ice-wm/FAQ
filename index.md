@@ -97,12 +97,14 @@ You can customize IceWM by editing the following configuration files:
     IceWM theme path/name.
 - [prefoverride](https://ice-wm.org/man/icewm-prefoverride)
     To override theme preferences.
+- [focus_mode](https://ice-wm.org/man/icewm-focus_mode)
+    The IceWM focus model.
 
 #### menu
 
 
-The `menu` file controls the contents in your menu (You knew that,
-right?). It has the following syntax:
+The `menu` file controls the contents in your Start menu.
+It has the following syntax:
 
 ```
     prog Program Icon app -with -options
@@ -135,117 +137,6 @@ timeout is integer value, it specifies minimum time
 interval (in seconds) between menu reloading. Zero value means
 updating menus every time when user click it.
 
-This is an example by the author of this feature:
-
-```
-#!/bin/sh
-#
-# icewm-ps-menu.sh - Process menu for IceWM.
-#
-# Written by Konstantin Korikov.
-#
-# This is test script that generates IceWM menu
-# with running user process list. It uses menuprogreload
-# feature of IceWM menu. To use this script, add followed
-# line to ~/.icewm/menu or  ~/.icewm/toolbar
-#
-#   menuprogreload ps - 0 icewm-ps-menu.sh
-#
-
-if [ $# = 1 ]; then
-        set `ps -p $1 --no-header -o pid,%cpu,%mem,time`
-        echo "prog 'CPU: $2%' - true"
-        echo "prog 'MEM: $3%' - true"
-        echo "prog 'TIME: $4' - true"
-        echo "separator"
-        for i in HUP INT KILL TERM; do
-                echo "prog $i - kill -$i $1"
-        done
-else
-        ps -aU `id -ru` --no-headers -o '%p|%c' |
-        awk -F '|' -v sc="$0" \
-          '{ printf("menuprogreload \"%d %s\" - 0 %s %d\n", $1, $2, sc, $1) }'
-fi
-```
-
-Some more can be found in patch 993038 in IceWM patch tracker.
-
-
-#### preferences
-
-
-The `preferences` file is the main configuration file. The default
-file is pretty much self documenting, so go and have a look. In case you
-ever wondered about themes: they can define all the options you can use in
-this file - and their definitions **override** all your personal customization!
-
-#### keys
-
-
-In the `keys` file one can define shortcuts for starting programs.
-The existing entries make clear what one has to define.
-
-#### toolbar
-
-
-The `toolbar` file defines some buttons which can be clicked next to
-the menu in the toolbar. It uses the same format as the menu file.
-You can also have folders in the toolbar. The easiest way to do that
-is simply by copying a menu from the /menu file over to the /toolbar file.
-
-#### winoptions
-
-
-The `winoptions` file can be used to define the appearance of X
-applications like on which desktop they should appear, if should have a
-border, menu, titlebar, etc.
-
-#### startup
-
-
-The `startup` is a script (must be executable) that is executed by
-`icewm-session` command on startup.
-
-It can look like this:
-```
-#!/bin/sh
-idesk&
-(sleep 2; psi&)&
-```
-
-Do not forget to make this file executable
-```
-$ chmod +x startup
-```
-
-Note: It is recommended to use '#!/bin/sh' as the first line, to use /bin/sh
-to execute the script.
-
-Also make sure all applications are starting at background (&).
-
-#### theme
-
-
-The `theme` file is new from IceWM 1.2.10. It specifies which
-theme should be used
-```
-Theme=myfavorittheme/default.theme
-#Theme=myfavorittheme/default.theme
-```
-
-The `theme` file is changed every time you
-switch theme in menu and selected theme is therefore used after IceWM restart.
-
-#### prefoverride
-
-
-The `prefoverride` file is new from IceWM 1.2.12. In this file you can
-specify any preference which will override any preference specified by theme or
-anything else. This is introduced to solve troubles with order of preferences
-interpretation and give a user possibility to customize global things he wants to
-have allways the same.
-
-
 ### What are focus models?
 
 
@@ -270,12 +161,30 @@ four general focus models that are implemented by IceWM:
     transient windows for the active window.
 
 
-*"A window is raised"* is telling and needs no
-further explanation.
-
 *"A window is activated, is focused, gets the
 focus,..."* means that input (e. g. keystrokes) now are sent
 to that window.
+
+IceWM implements these focus models:
+
+0. custom : Is configured by the following ten options
+   in the preferences file: "ClickToFocus", "FocusOnAppRaise",
+   "RequestFocusOnAppRaise", "RaiseOnFocus", "RaiseOnClickClient",
+   "FocusChangesWorkspace", "FocusOnMap", "FocusOnMapTransient",
+   "FocusOnMapTransientActive", "MapInactiveOnTop"
+
+1. click : changing input focus requires to click a window with
+   the left mouse button.
+
+2. sloppy : set input focus merely by moving the mouse pointer
+   over a window.
+
+3. explicit : no focus change or window raise unless you force it.
+
+4. strict : similar to sloppy, but keep focus with last window
+   even if new applications become mapped.
+
+5. quiet : like sloppy, but without flashing if something wants focus.
 
 **In short:** The focus model controls what you have to do to
 make a window pop up and to have it listen to what you type.
@@ -349,62 +258,11 @@ corresponding menu is bound according to the following scheme:
     -----------------------------
 ```
 
-### Setting the lock command
-
-
-By default IceWM uses `xlock` (without any
-argument) to lock your screen. There may be several reasons for using
-a different lock command:
-
-
-- There is no `xlock` on your machine.
-- `xlock` tends to crash on your machine either
-    leaving you locked out (best case) or unlocking your session
-    (worst case).
-- `xlock` has some CPU intensive modes compiled in that
-    interfere with your SETI@HOME session.
-
-
-It is very easy to set a lock command: Simply add
-
-```
-    LockCommand="xlock -mode blank"
-```
-
-to your `$HOME/.icewm/preferences` and
-`xlock` will run in `blank` mode (which
-shows nothing but a black screen).
-
-The example was chosen on purpose: Using this mode you have the best
-chance of your monitor going asleep (enter power saving mode).
-
-### Monitor more devices?
-
-
-In the `preferences` file just change the option
-`NetworkStatusDevice` to read
-
-```
-    NetworkStatusDevice="eth0"
-```
-
-Replace `"eth0"` by `"eth0 ppp0"` to monitor
-eth0 and ppp0.
-
-
 ### Monitor mailboxes?
 
 
-No problem either. Your `MailBoxPath` in the `preferences`
-file should read
-
-```
-    MailBoxPath="imap://username:password@remote.host"
-```
-
-Replace `imap` with `pop` or `pop3` if necessary. Be sure to have save
-permissions on the preferences file so nobody else can get your mail password.
-
+No problem. See
+[mailbox monitoring](https://ice-wm.org/manual/#mailbox-monitoring-updated-2018-03-04).
 
 ### Disable the Alt keys?
 
@@ -459,8 +317,9 @@ Netscape Navigator window, use this option:
 ```
 
 The other options work according to roughly the same pattern. The list
-of winoptions you can find in the [manual](/manual/)
- chapter about Window Options.
+of winoptions you can find in the
+[man page](https://ice-wm.org/man/icewm-winoptions)
+about Window Options.
 
 
 ### Keep window on top?
@@ -721,10 +580,7 @@ To install themes simply unpack them into your `~/.icewm/themes/` directory.
 ### Which image formats?
 
 
-If IceWM is compiled with the standard xpm libraries, then it can
-only employ xpm images (as backgrounds, etc.). If, however, IceWM is
-compiled with `imlib` support, it can display all
-common image formats including jpeg, gif, png, and tiff.
+IceWM supports JPEG, PNG and XPM. Support for SVG is optional.
 
 ### Setting the background
 
@@ -913,7 +769,7 @@ and can be queried by `icewm --directories`.
 ### How to make themes?
 
 
-There is documentation on [themes](/themes/)
+There is documentation on [themes](https://ice-wm.org/themes/)
 written by MJ Ray and update by Adam Pribyl.
 
 
@@ -1268,131 +1124,7 @@ This section is a collection of tools that simplify the usage of
 IceWM. Head on over to the utilities section of the IceWM homepage if you
 want an up to date overview about all available tools.
 
-### IcePref
-
-**Note:** IcePref is a history these day, but you can still find it.
-
-IcePref is a small graphical utility (written with Python and the Gtk
-toolkit) designed to simplify the configuration of IceWM.
-
-It currently supports the options of IceWM version 1.0.4 and should
-(in theory) work consistently with versions at least as high as
-1.0.4. While it is not a particularly elegant program, I have found
-IcePref useful and hope that it will be found useful by those who use
-IceWM and also have Gtk installed.
-
-IcePref should be especially useful to those who have GNOME, and who
-are therefore likely to have PyGNOME and PyGTK already installed on
-their boxes.
-
-
-### IcePref2
-
-
-IcePref2 is a successor to IcePref.
-It is included in *IceWM Control Panel*.
-
-
-IcePref2 is advanced preferences file editor.
-
-
-### IceME
-
-
-The IceWM Menu Editor allows users to edit their menu without knowing
-anything about config files.
-It is included in *IceWM Control Panel*.
-
-
-### IceWM Control Panel
-
-IceWM Control Panel is the first full-featured, Gtk-based control panel
-for IceWM. It is meant to run in IceWM, but can be used in ANY window
-manager as a general-purpose control panel. It was inspired by the Qt-based
-application called IceMC, but includes many more tools, a more familiar
-Windoze Control Panel-like interface, and uses the MUCH faster Gtk user
-interface (Who runs a fast Window Manager like IceWM, to launch SLOW-running,
-memory-intensive Qt/KDE-based applications?? I sure don't).
-Let's face it: IceWM and fast Gtk interfaces work well together.
-
-IceWM Control Panel includes applications for editing preferences (IcePref2),
-menus (IceMe), themes, sounds (IceSoundMngr), cursors, keys, mouse, wallpapers,
-winoptions, icon browser etc.
-
-
-### IceWM Control Center
-
-This is Vadim Khohlov's software. A good collection of the configuration
-software for IceWM, include: menu/toolbar editor, Ice Sound Configurator,
-theme Switcher, backgroundoptions editor, IceWM's winoptions editor, keys
-editor.
-
-### IceWMConf
-
-
-IceWMConf is a small application which helps with configuring IceWM.
-It tries to be self-configuring, starting with the basic options from
-the system preferences files and then overriding them with user
-preferences.
-
-In this way, it should pick up new options introduced by later
-versions of IceWM. (It does mean that old options aren't deleted, so
-you have to occasionally "trim" your user file to remove
-lines IceWM grumbles about, but that isn't very necessary.)
-
-Its user interface is functional bordering on spartan, but builds its
-own option categories and has an option name search facility. If you
-want a really user friendly configuration tool, I suggest IcePref.
-
-
-### IceWO
-
-IceWO is an icewm's winoption file editor. It allows you to set winoptions
-for any window by clicking on buttons, without manual editing winoptions file.
-
-
-### IceMC
-
-
-IceMC is a graphical menu editor for IceWM, designed to be simple and stable.
-You can configure your menu entries with copy, paste, and drag'n'drop.
-
-
-### MenuMaker
-
-MenuMaker is utility written entirely in Python that scans through the system for
-installed programs and generates menu for specified X window manager.
-It is by far more superior to existing solutions in terms of knowledge base size,
-maintainability and extensibility, and has a number of features that have no counterparts
-in its class. MenuMaker is intended for users of lightweight \*NIX graphical desktop environments.
-
-### IDesk
-
-
-iDesk gives users of minimal wm's (fluxbox, pekwm, windowmaker...) icons on
-their desktop. The icon graphics are either from a png or svg (vector) file
-and support some eyecandy effects like transparency. Each icon can be confgured
-to run one or more shell commands and the actions which run those commands are
-completely configurable. In a nutshell if you want icons on your desktop and
-you don't have or dont't want KDE or gnome doing it, you can use idesk.
-
-
-### DFM
-
-
-DFM is a file manager for Linux and other UNIX like Operating Systems.
-DFM is the abrvabation for Desktop File Manager. "Desktop" stands for the
-capability to place icons on the root window.
-
-
-### Bugs and Problems
-
-
-This section is for problems that are intrinsic to the philosophy of
-IceWM or that are caused by bugs.
-
 ### IceWM ignores my colors
-
 
 Some users wonder why the colors specified in their preference files
 seem to have no effect upon the actual appearance of things. The
