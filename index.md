@@ -43,23 +43,31 @@ See [README](https://github.com/ice-wm/icewm/blob/master/README.md) or
 ### Default window manager?
 
 In order to run IceWM, assure that the `icewm` and `icewm-session`
-are in your `PATH`. Then add this to your `~/.xinitrc`:
+are in your `PATH`. If you use a display manager create a file `~/.dmrc`:
 
-```bash
-    #!/bin/bash
-    icewm-session
+```
+[Desktop]
+Session=icewm-session
+Language=en_US.utf8
 ```
 
-Also do `chmod +x ~/.xinitrc`.
+Make sure that `icewm-session.desktop` can be found
+using `locate icewm-session.desktop`.
 
-Then you can start `X11` with `startx`, or select `icewm-session`
-in your display manager settings when you login. Check that
-`icewm-session.desktop` can be found using `locate icewm-session.desktop`.
+If you use `startx` then create a `~/.xinitrc`:
+
+```bash
+#!/bin/bash
+icewm-session
+```
+
+And do `chmod +x ~/.xinitrc`.
+
 Maybe try the 
 [icewm-set-gnomewm](https://ice-wm.org/man/icewm-set-gnomewm)
 command to make icewm your default under a GNOME environment.
 
-You can add further startup commands to
+You can add startup commands to
 [your startup file](https://ice-wm.org/man/icewm-startup)
 
 ### Configuration
