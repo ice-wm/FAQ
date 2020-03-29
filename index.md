@@ -1282,6 +1282,11 @@ X server font are either provided by X server itself e.g. `/etc/X11/XF86Config` 
 or by XFS (X Font Server) defined in. `/etc/X11/fs/config`.
 
 
+### How can I make the title bar of an XTerm span the whole screen when maximized?
+
+Set `ConsiderSizeHintsMaximized=0`.
+
+
 ### License
 
 
