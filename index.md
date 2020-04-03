@@ -305,23 +305,30 @@ Alt+mouse drag to move window for all IceWM handled windows.
 
 This section is about how you can make windows appear on a certain
 workspace, have them displayed without a border or titlebar, or put them
-above or under other windows. All this can be accomplished using the
-`winoptions` preferences file, some of it even interactively.
-
+above or under other windows. This is accomplished using 
+[winoptions](https://ice-wm.org/man/icewm-winoptions).
 
 Assigning a particular option (icon, default layer, default
 workspace, etc.) to a given application or application window can be
 done as follows:
 
 First, you should acquire the `WM_CLASS` descriptor
-using `xprop`. Simply run
+using `xprop`:
 
 ```
-    xprop |grep WM_CLASS
+    xprop | grep WM_CLASS
 ```
 
-in an XTerm. The first item is the window name and the second item it
-the window class. You can then add the desired options to your
+in a terminal.
+The output of `xprop` for Mozilla Firefox is
+
+```
+    WM_CLASS(STRING) = "Navigator", "Firefox"
+```
+
+The first double quoted name is the window name
+and the second is the window class.
+You can then add the desired options to your
 `winoptions` file. Entries in that file have one
 of the following formats:
 
@@ -331,12 +338,6 @@ of the following formats:
     name.option:       value
 ```
 
-The `WM_CLASS` for a Netscape Navigator window is
-
-```
-    "Navigator", "Netscape"
-```
-
 To assign the icons `navigator_*.xpm` to the
 Netscape Navigator window, use this option:
 
@@ -344,8 +345,8 @@ Netscape Navigator window, use this option:
     Navigator.Netscape.icon: navigator
 ```
 
-The other options work according to roughly the same pattern. The list
-of winoptions you can find in the
+The other options work according to roughly the same pattern.
+The list of winoptions you can find in the
 [man page](https://ice-wm.org/man/icewm-winoptions)
 about Window Options.
 
@@ -355,10 +356,10 @@ about Window Options.
 
 There are two slightly different ways to do this. Use whatever suits your
 need. Option one: the window always stays on top of any other windows. Set
-the following option `name.class.layer: onTop`.
+the following winoption `name.class.layer: onTop`.
 Option two: the window sits in a rectangular zone of the desktop where no
-other windows can be placed: Use the doNotCover option:
-`name.class.doNotCover: 1`. By the way: this is how the taskbar or
+other windows can be placed: Use the doNotCover winoption:
+`name.class.doNotCover: 1`. By the way, this is how the taskbar or
 the GNOME panel work. It's a good idea to use this on gkrellm, your icq
 client, or other monitoring tools you'd always like to have in view.
 
@@ -366,13 +367,8 @@ client, or other monitoring tools you'd always like to have in view.
 
 
 There may be programs that you either want to start up iconified or
-maximized. Until now, there is no possible entry in your
-`winoptions` file that iconifies or maximizes a
-windows of a given name or class as it is mapped.
-
-Fortunately some programs (like Netscape) have a command line option
-to be started iconic and most X program support
-`-geometry` to specify a default window size.
+maximized. For this there are winoptions: `startMinimized`,
+`startMaximized`, `startFullscreen`, etc.
 
 ### Map to a workspace?
 
@@ -394,7 +390,7 @@ Or you can use `icesh`:
 icesh -class xeyes setWorkspace 0
 ```
 
-This move xeyes to my workspace 0.
+This move xeyes to workspace 0.
 
 
 ### Basic keyboard shortcuts
