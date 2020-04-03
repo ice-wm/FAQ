@@ -7,10 +7,10 @@ Last modified 2020/03/21
 ### What is IceWM?
 
 IceWM is a **window manager** for the **X11** window system.
-It is designed to be **small, fast, lightweight,** and to
-emulate the **look and feel of Motif, OS/2 and Windows.**
+It is designed to be **small, fast, lightweight**, and to
+emulate the **look and feel of Motif, OS/2 and Windows**.
 It is **very configurable**: it provides a **customizable look**
-with a relatively **consistent feel.**
+with a relatively **consistent feel**.
 
 Now that you know what IceWM is and are still reading on you are
 obviously interested in using it. To use a program you will first
@@ -42,33 +42,52 @@ See [README](https://github.com/ice-wm/icewm/blob/master/README.md) or
 
 ### Default window manager?
 
-In order to run IceWM, assure that the `icewm` and `icewm-session`
-are in your `PATH`. If you use a display manager create a file `~/.dmrc`:
+Under GNOME you can run
+[icewm-set-gnomewm](https://ice-wm.org/man/icewm-set-gnomewm)
+to make IceWM your default window manager.
 
+Some display managers examine `~/.dmrc`:
+
+```desktop
+    [Desktop]
+    Session=icewm-session
+    Language=en_US.utf8
 ```
-[Desktop]
-Session=icewm-session
-Language=en_US.utf8
+
+Make sure that `icewm-session.desktop` can be found.
+Use `locate icewm-session.desktop`.
+It may need to be placed in `/usr/share/xsessions/`.
+
+Check `/var/lib/AccountsService/users/$USER` for your default session.
+This may look like:
+
+```desktop
+    [User]
+    XSession=icewm-session
+    SystemAccount=false
 ```
 
-Make sure that `icewm-session.desktop` can be found
-using `locate icewm-session.desktop`.
-
-If you use `startx` then create a `~/.xinitrc`:
+Another way to set this is:
 
 ```bash
-#!/bin/bash
-icewm-session
+   $ myid=$(id -u -r)
+   $ gdbus call --system --dest org.freedesktop.Accounts \
+        --object-path /org/freedesktop/Accounts/User${myid} \
+        --method org.freedesktop.Accounts.User.SetXSession icewm-session
 ```
 
-And do `chmod +x ~/.xinitrc`.
+If you use `startx` to run X11 then create a `~/.xinitrc`:
 
-Maybe try the 
-[icewm-set-gnomewm](https://ice-wm.org/man/icewm-set-gnomewm)
-command to make icewm your default under a GNOME environment.
+```bash
+    #!/bin/bash
+    icewm-session >~/.xinitrc.log 2>&1
+```
 
-You can add startup commands to
-[your startup file](https://ice-wm.org/man/icewm-startup)
+Do `chmod +x ~/.xinitrc`. If you use Xdm then link:
+`ln ~/.xinitrc ~/.xsession`.
+
+Any startup commands for your IceWM session go into the
+[icewm startup file](https://ice-wm.org/man/icewm-startup).
 
 ### Configuration
 
@@ -105,7 +124,7 @@ You can customize IceWM by editing the following configuration files:
     IceWM theme path/name.
 - [prefoverride](https://ice-wm.org/man/icewm-prefoverride)
     To override theme preferences.
-- [focus_mode](https://ice-wm.org/man/icewm-focus_mode)
+- [focus\_mode](https://ice-wm.org/man/icewm-focus_mode)
     The IceWM focus model.
 
 #### menu
@@ -120,11 +139,13 @@ It has the following syntax:
 
 `prog` is a keyword, telling IceWM that it's a program entry. Other keywords
 are `separator` to draw a separator and
+
 ```
-menu Xyz folder_icon {
-  prog ...
-}
+    menu Xyz folder_icon {
+      prog ...
+    }
 ```
+
 to open a new sub menu called Xyz. `Program` is
 the name which will be shown in the menu. Enclose it in apostrophes if you
 need more than one word here. `Icon` will be used as the menu
@@ -169,9 +190,8 @@ four general focus models that are implemented by IceWM:
     transient windows for the active window.
 
 
-*"A window is activated, is focused, gets the
-focus,..."* means that input (e. g. keystrokes) now are sent
-to that window.
+*A window is activated, is focused, gets the focus, ...*
+means that input (e. g. keystrokes) now are sent to that window.
 
 IceWM implements these focus models:
 
@@ -200,16 +220,16 @@ make a window pop up and to have it listen to what you type.
 ### Configure mouse buttons
 
 
-`UseRootButtons` and `ButtonRaiseMask` are so called **bitmask options.**
+`UseRootButtons` and `ButtonRaiseMask` are so called **bitmask options**.
 
-This concept is e.g. used by `chmod` where `"4"` stands for read access,
-`"2"` for write access and `"1"` for execute (or change directory)
+This concept is e.g. used by `chmod` where `4` stands for read access,
+`2` for write access and `1` for execute (or change directory)
 access and you add up the relevant numbers to control the file access.
 
 As far as `UseRootButtons` and
 `ButtonRaiseMask` are concerned,
-`"1"` stands for the first mouse button,
-`"2"` for the second one and `"4"`
+`1` stands for the first mouse button,
+`2` for the second one and `4`
 for the third one. The following list shows which number stands for
 which combination of mouse buttons:
 
@@ -293,8 +313,8 @@ Assigning a particular option (icon, default layer, default
 workspace, etc.) to a given application or application window can be
 done as follows:
 
-First, you should acquire the `"WM_CLASS"` descriptor
-using `xprop.` Simply run
+First, you should acquire the `WM_CLASS` descriptor
+using `xprop`. Simply run
 
 ```
     xprop |grep WM_CLASS
@@ -311,13 +331,13 @@ of the following formats:
     name.option:       value
 ```
 
-The `"WM_CLASS"` for a Netscape Navigator window is
+The `WM_CLASS` for a Netscape Navigator window is
 
 ```
     "Navigator", "Netscape"
 ```
 
-To assign the icons `"navigator_*.xpm"` to the
+To assign the icons `navigator_*.xpm` to the
 Netscape Navigator window, use this option:
 
 ```
@@ -352,7 +372,7 @@ windows of a given name or class as it is mapped.
 
 Fortunately some programs (like Netscape) have a command line option
 to be started iconic and most X program support
-`"-geometry"` to specify a default window size.
+`-geometry` to specify a default window size.
 
 ### Map to a workspace?
 
@@ -385,17 +405,16 @@ with keystrokes.
 
 
 ```
-Alt-Tab = Switches between the open windows
-Alt-F4 = Closes a window
-Alt-F9 = Minimizes a window
-Alt-F10 = Maximizes a window
-Alt-F12 = Rolls the window up
-(leaving only the titlebar visible, press Alt-F12 again and the window rolls back down)
-Alt-Shift-F10 = Maximizes the window vertically
-Alt-Ctrl-arrow left = Changes workspaces from 1-12
-Alt-Ctrl-arrow right = Changes workspaces from 12-1
-Alt-Ctrl-Esc = Opens the  window list
-Ctrl-Esc = Opens the  menu
+Alt+Tab = Switches between the open windows
+Alt+F4 = Closes a window
+Alt+F9 = Minimizes a window
+Alt+F10 = Maximizes a window
+Alt+F12 = Rolls the window up
+Alt+Shift+F10 = Maximizes the window vertically
+Ctrl+Alt+arrow left = Changes workspaces from 1-12
+Ctrl+Alt+arrow right = Changes workspaces from 12-1
+Ctrl+Alt+Esc = Opens the  window list
+Ctrl+Esc = Opens the  menu
 ```
 
 
@@ -408,7 +427,7 @@ too.
 
 Before I describe how to switch between virtual desktops I want to
 describe how to control their number. Imagine that your
-`$HOME/.icewm/preferences` has a row reading
+`~/.icewm/preferences` has a row reading
 
 ```
     WorkspaceNames="1","2","3","4","5","6","7","8","9","0"
@@ -440,38 +459,29 @@ You can imagine two ways of switching between desktops:
 IceWM has both ways:
 
 
--  To switch to desktop number *n* you simply press
-    `"Ctrl-Alt-n"`
--  To switch one desktop to the left you press
-    `"Ctrl-Alt-Cursor_Left"`
--  To switch one desktop to the right you press
-    `"Ctrl-Alt-Cursor_Right"`
+- To switch to desktop number *n* you simply press `Ctrl+Alt+n`.
+- To switch one desktop to the left you press `Ctrl+Alt+Left`.
+- To switch one desktop to the right you press `Ctrl+Alt+Right`.
 
 
-`"Cursor_Left"` `("Cursor_Right")`
-represents the key that moves your cursor one character to the left
-(right).
-
-If you are using `"Ctrl-Alt-Cursor_Right"` on the
-rightmost desktop you switch to the leftmost desktop. From here,
-`"Ctrl-Alt-Cursor_Left"` brings you back to the
+If you are using `Ctrl+Alt+Right` on the
+rightmost desktop you switch to the leftmost desktop.
+From here, `Ctrl+Alt+Left` brings you back to the
 rightmost desktop.
 
 *What if you have more than ten virtual desktops?* In this
-case `"Ctrl-Alt-n"` will only work for the first ten
+case `Ctrl+Alt+n` will only work for the first ten
 desktops while switching to the left or right still works for all
 desktops.
 
-IceWM has another feature to offer: You may not only use your
-keyboard to switch desktops, you can also use it to move windows from
-one desktop to another. The next section is on this (you should read
-it, too).
-
 **Note:** To switch desktops when moving mouse on desktop edges use preference:
+
 ```
-EdgeSwitch=1
+    EdgeSwitch=1
 ```
-then you can change workspaces automatically by moving your cursor to the left/right edges of your screen.
+
+then you can change workspaces by moving your cursor to
+the left/right edges of your screen.
 
 
 ### Move windows to desktops
@@ -480,99 +490,68 @@ then you can change workspaces automatically by moving your cursor to the left/r
 In the previous section I explained how to switch between desktops.
 If you didn't already read it you should do it now because moving the
 active window to another desktop works almost the same like switching
-to a certain desktop. All you have to do is pressing the
-`"Shift"` while switching to the desktop:
+to a certain desktop. All you have to do is press the
+`Shift` while switching to the desktop:
 
 
--  To move a window to desktop number *n* you simply
-    press `"Ctrl-Alt-Shift-n"`
--  To move a window one desktop to the left you press
-    `"Ctrl-Alt-Shift-Cursor_Left"`
--  To move a window one desktop to the right you press
-    `"Ctrl-Alt-Shift-Cursor_Right"`
+-  To move a window to desktop number *n* press `Ctrl+Alt+Shift+n`.
+-  To move a window one desktop to the left press `Ctrl+Alt+Shift+Left`.
+-  To move a window one desktop to the right press `Ctrl+Alt+Shift+Right`.
 
 
 ### Command Line Interface
 
 
-You should run IceWM with `"TaskBarDoubleHeigth=1"`
-because that will enable the CLI
-(see *"What is the blank bar in the task bar good for?"* for some
-more information).
+You should run IceWM with `TaskBarDoubleHeigth=1`,
+because that will enable the *Address Bar*
+(see *What is the blank bar in the task bar good for?*).
+This is especially useful if you rather frequently need to access
+man pages and don't want to have `xman` hang around all the time.
 
-The CLI is especially useful if you rather frequently need to access
-man pages and don't want to have xman hang around all the time.
-
-If you enter `man perl` and press
-`"Ctrl-ENTER"` an XTerm will pop up displaying the
-main Perl man page. If you press `"q"` not only the
+If you enter `man perl` in the *Address Bar* and press
+`Ctrl+Enter` a terminal will pop up displaying the
+Perl man page. If you press `q` not only the
 man page no longer is displayed but the XTerm will terminate, too.
 
-This only is *one* example of how to use the CLI. You can use
+This is just one example of how to use the CLI. You can use
 it to issue any other command as well. A problem that might occur is
 that the XTerm will terminate before you had time to read the output
 of a command (it terminates as soon as the command is done).
-
-In most such cases it is sufficient to pipe the output through
-`less` (this is one of the rare cases you cannot
-use `more` because it terminates after displaying
-the last line). However, there are cases (mainly programs that write
-colorful output such as `ls`) that may result in
-trouble with `less`.
-
-Fortunately Linux (any Unix version?) offers a solution to these
-cases, too: The `sleep` command. It sleeps some
-time, then terminates. So you could use
-
-```
-    ls $HOME/bin --color ; sleep 1m
-```
-
-to list all programs in your `$HOME/bin`
-directory. The `sleep` command will wait the given
-period of time (in this case a minute) before the XTerm automatically
-will close (you can use `"Ctrl-C"` to abort the
-`sleep` command before that time went by).
+The terminal may support a **hold** resource or `-hold` option,
+which will keep the terminal open until it is closed by you.
 
 
 ### Can I use Win(95) keys?
 
 
-Sure you can. Josef Oswald reported:
+Sure you can. In `.xinitrc`
 
-this is in `.xinitrc`
 ```
-clear mod4
-keycode 64 = Alt_L
-keycode 113 = Alt_R
-keycode 115 = Meta_L
-keycode 116 = Meta_R
-add Mod4 = Meta_L Meta_R
+    clear mod4
+    keycode 64 = Alt_L
+    keycode 113 = Alt_R
+    keycode 115 = Meta_L
+    keycode 116 = Meta_R
+    add Mod4 = Meta_L Meta_R
 ```
 
 in `.Xmodmap` there is:
-```
-add Mod1 = Alt_L
-add Mod2 = Mode_switch
-keycode 117 = Menu
-```
-
-and then in
-
-`~/.icewm/preferences`
 
 ```
-Win95Keys=1 # was 0
-
-# KeySysWinMenu="Shift+Esc"
+    add Mod1 = Alt_L
+    add Mod2 = Mode_switch
+    keycode 117 = Menu
 ```
 
-as can be seen I did _not_ enable the above, as I don't like pressing
-two keys. If one wants to use it, it does work.
+and in `~/.icewm/preferences`
+
+```
+    Win95Keys=1 # was 0
+```
 
 On a free workspace the right Win95 opens the list of Workspaces.
 
-Now also in Open-office I can use the right menu key to open the menus in the
+Now also in OpenOffice I can use the right menu key to open the menus in the
 OOo taskbar with the letters for the shortcut I can switch to the desired
 menu without needing to leave the keyboard,  my preferred way of working
 on the pc.
@@ -581,8 +560,9 @@ on the pc.
 ### How to install Themes
 
 
-IceWM can be customized using a great variety of themes. You can download them
-usually as .tar.gz archives on the net.
+IceWM can be customized using a great variety of themes.
+You can download them from
+[https://www.box-look.org/](https://www.box-look.org/browse/cat/142/ord/latest/).
 To install themes simply unpack them into your `~/.icewm/themes/` directory.
 
 ### Which image formats?
@@ -634,9 +614,14 @@ standing in the middle you can use
     DesktopBackgroundCenter=""
 ```
 
-DesktopBackgroundCenter is used to tell IceWM how you want your wallpaper placed on the screen.
-If set to 1 your picture will be centered on screen. As a result of that, you will only have one picture in the middle of your desktop.
-If set to 0 your picture file will fill the whole screen. That is a good thing if you are using a pattern thingy to cover the whole desktop.
+DesktopBackgroundCenter is used to tell IceWM how you want
+your wallpaper placed on the screen.
+If set to 1 your picture will be centered on screen.
+As a result of that, you will only have one picture
+in the middle of your desktop.
+If set to 0 your picture file will fill the whole screen.
+That is a good thing if you are using a pattern thing
+to cover the whole desktop.
 
 
 ### Setting the clock format
@@ -666,11 +651,11 @@ and for the clock tooltip format you use
 
 Ordinary characters placed in the format string are printed without
 conversion (if possible, see below). Conversion specifiers are
-introduced by a percent character `"%",` and are
+introduced by a percent character `%`, and are
 replaced by a corresponding string.
 
-**Important Note:** While `"DateFormat"` and
-`"TimeFormat"` both support all the format
+**Important Note:** While `DateFormat` and
+`TimeFormat` both support all the format
 descriptors the latter only has full support if used with
 
 ```
@@ -688,11 +673,10 @@ for
 3. A, P, and M (for AM and PM)
 
 
-Format descriptors which may only be in
-`"TimeFormat"` if
-`"TaskBarClockLeds=0"` (in general or depending on
-the locale) are labeled as **restricted** in the following
-table. It shows the replacement for all format descriptors available.
+Format descriptors which may only be in `TimeFormat` if
+`TaskBarClockLeds=0` (in general or depending on the locale)
+are labeled as **restricted** in the following table.
+It shows the replacement for all format descriptors available.
 
 The values in parentheses show what the different format specifiers
 display for
@@ -703,57 +687,57 @@ on my machine with hardware clock and Linux running UTC, local being
 "C" (i.e.  no internationalization at all):
 
 
-- `"%a"` (Sat) restricted
+- `%a` (Sat) restricted
     The abbreviated weekday name according to the current locale.
-- `"%A"` (Saturday) restricted
+- `%A` (Saturday) restricted
     The full weekday name according to the current locale.
-- `"%b"` (Sep) restricted
+- `%b` (Sep) restricted
     The abbreviated month name according to the current locale.
-- `"%B"` (September) restricted
+- `%B` (September) restricted
     The full month name according to the current locale.
-- `"%c"` (Sat Sep 04 19:09:22 1999) restricted
+- `%c` (Sat Sep 04 19:09:22 1999) restricted
     The preferred date and time representation for the current
     locale.
-- `"%d"` (04)
+- `%d` (04)
     The day of the month as a decimal number (range 01 to 31).
-- `"%H"` (19)
+- `%H` (19)
     The hour as a decimal number using a 24-hour clock (range 00 to
     23).
-- `"%I"` (07)
+- `%I` (07)
     The hour as a decimal number using a 12-hour clock (range 01 to
     12).
-- `"%j"` (247)
+- `%j` (247)
     The day of the year as a decimal number (range 001 to 366).
-- `"%m"` (09)
+- `%m` (09)
     The month as a decimal number (range 01 to 12).
-- `"%M"` (09)
+- `%M` (09)
     The minute as a decimal number.
-- `"%p"` (PM) restricted
+- `%p` (PM) restricted
     Either "am" or "pm" according to the given
     time value, or the corresponding strings for the current locale.
-- `"%S"` (22)
+- `%S` (22)
     The second as a decimal number.
-- `"%U"` (35)
+- `%U` (35)
     The week number of the current year as a decimal number, starting
     with the first Sunday as the first day of the first week.
-- `"%W"` (35)
+- `%W` (35)
     The week number of the current year as a decimal number, starting
     with the first Monday as the first day of the first week.
-- `"%w"` (06)
+- `%w` (06)
     The day of the week as a decimal, Sunday being 0.
-- `"%x"` (09/04/99) restricted
+- `%x` (09/04/99) restricted
     The preferred date representation for the current locale without
     the time.
-- `"%X"` (19:09:22) restricted
+- `%X` (19:09:22) restricted
     The preferred time representation for the current locale without
     the date.
-- `"%y"` (99)
+- `%y` (99)
     The year as a decimal number without a century (range 00 to 99).
-- `"%Y"` (1999)
+- `%Y` (1999)
     The year as a decimal number including the century.
-- `"%Z"` (UTC) restricted
+- `%Z` (UTC) restricted
     The time zone or its name or its abbreviation.
-- `"%%"` restricted
+- `%%` restricted
     A literal "%" character.
 
 
@@ -768,8 +752,8 @@ This is colon-separated list of directories.
 A directory is subjected to tilde expansion and expansion
 of at most one leading environment variable like `$HOME`.
 If the icon is still not found sofar, then IceWM looks
-for icons in `$ICEWM_PRIVCFG/icons/` (or `$HOME/.config/icewm/icons/`,
-or `$HOME/.icewm/icons/`), then at theme icons,
+for icons in `$ICEWM_PRIVCFG/icons/` (or `~/.config/icewm/icons/`,
+or `~/.icewm/icons/`), then at theme icons,
 then at CFGDIR/icons, then at LIBDIR/icons.
 Here CFGDIR and LIBDIR are defined at compile time
 and can be queried by `icewm --directories`.
@@ -793,18 +777,18 @@ incorporate this feature, they generally go unused.
 
 
 If you are running IceWM with the
-`"TaskBarDoubleHeight"` option set, a blank field in
+`TaskBarDoubleHeight` option set, a blank field in
 the task bar occurs. It is a command line interface.
 
 In this field you can enter commands to start programs. If you click
 inside the field and enter `xclock` the X clock is
 started.
 
-If you click on it and simply press `"Ctrl-Enter"`
+If you click on it and simply press `Ctrl+Enter`
 an XTerm is being started.
 
 If you enter a non-X command and press
-`"Ctrl-Enter"` an that command is being executed in
+`Ctrl+Enter` an that command is being executed in
 an XTerm.
 
 ### Stop grabbing my keystrokes
@@ -822,13 +806,13 @@ Marko suggests the following workaround:
 
 
 He advises that this will only work if
-`"ScrollLock"` is set up as a modifier.
+`ScrollLock` is set up as a modifier.
 
 Here is how to use the X11 `xmodmap` utility to setup `ScrollLock` as
 a modifier (from Marco Molteni):
 -  check which modifiers are free:
 
-```
+```bash
     $ xmodmap -pm
 
     xmodmap:  up to 2 keys per modifier, (keycodes in parentheses):
@@ -844,9 +828,14 @@ a modifier (from Marco Molteni):
 ```
 
 -  in this example `mod3` is free, so we bind the `ScrollLock` key to it:
-     $ xmodmap -e "add mod3 = Scroll_Lock"
-   this invocation of `xmodmap` should be put in the script that starts the
-   window manager, for example `$HOME/.xinit` or `$HOME/.xsession`, see
+
+```bash
+    $ xmodmap -e "add mod3 = Scroll_Lock"
+```
+
+   This invocation of `xmodmap` could be put in the script that starts the
+   window manager, `~/.xinit` or `~/.xsession`, or
+   in [startup](https://ice-wm.org/man/icewm-startup)
 
 ### How to lock the screen
 
@@ -862,38 +851,31 @@ habit like logging out root as soon as possible.
 With IceWM screen locking is very easy: If you press
 
 ```
-    Ctrl-Alt-Del
+    Ctrl+Alt+Del
 ```
 
 a menu pops up offering you the following tasks:
 
 
-- Lock `"W"`orkstation
-- `"L"`ogout
-- `"C"`ancel
-- `"R"`estart icewm
-- Re`"b"`oot
-- Shut`"d"`own
+- Loc`k` Workstation
+- `S`leep mode
+- `C`ancel
+- `L`ogout
+- Re`b`oot
+- Shut`d`own
+- `W`indow List
+- `R`estart icewm
+- `A`bout
 
 
 The letters that are emphasized in this FAQ are underlined in real
 life. The meaning of this emphasis is that you may e. g. press
-`"W"` to lock your workstation.
+`k` to lock your workstation.
 
 Another possibility (this is the one I prefer because I once to often
-pressed `"L"` in order to lock my machine) is to
-press `"ENTER".` The result is the same because the
-button that is active by default is *"Lock
-Workstation".*
-
-A more obvious reason for using `"ENTER"` in place
-of `"W"` is that it is easier to type in:
-`"Del"` and `"ENTER"` are next to
-each other.
-
-You could as well use your mouse to click on *"Lock
-Workstation"* but if you are already using your keyboard to
-evoke the menu why not use the keyboard to select from it?
+pressed `L` in order to lock my machine) is to
+press `Enter`. The result is the same because the
+button that is active by default is *Lock Workstation*.
 
 ### ... by mouse
 
@@ -905,17 +887,17 @@ following entry to your `$HOME/.icewm/toolbar`
     prog    xlock   xlock   xlock
 ```
 
-You could as well add that line
-`$HOME/.icewm/menu` or
-`$HOME/.icewm/programs` but that's not a good
-idea: Screen locking is often done in a hurry and if you have to scan
+You could as well add that line to `~/.icewm/menu` or
+`~/.icewm/programs`, but that's not a good idea:
+Screen locking is often done in a hurry and if you have to scan
 through a menu this will increase the chance that you will not lock
 your machine at all.
 
 ### ... using a lock command
 
 
-How to define a different lock command is described in section "Setting the lock command"
+How to define a different lock command is described in
+section "Setting the lock command"
 
 ### Support session management?
 
@@ -924,17 +906,16 @@ From 1.2.13 IceWM has some basic session management to manage all its parts.
 But this is where the more complicated desktop environments like
 GNOME, KDE or xfce join the game. IceWM still is mainly a window manager...
 but of course you can always start your favorite apps upon X start-up/login
-using the `.xinitrc` or `.xsession`files. Or use IceWM as the
-window manager instead of the default GNOME/KDE wm.
+using the `.xinitrc` or `.xsession` files. Or use IceWM as the
+window manager instead of the default GNOME/KDE window manager.
 
 ### Can I have icons on the desktop?
 
 
 Sure, but not from IceWM. Again, this is desktop environment work, but
 usually done by the respective file managers, since they already know about
-MIME types, file endings and such. IceWM users usually use idesk, dfm, rox, kfm or gmc,
-where idesk, dfm and rox are better suited for work on smaller (older) machines than the
-other two.
+MIME types, file endings and such. IceWM users usually use
+`idesk`, `dfm`, `rox`, `kfm` or `gmc`.
 
 ### My background is ignored?
 
@@ -948,12 +929,14 @@ reason can be, that the theme defines another image or color.
 
 From IceWM 1.2.14 it is possible to specify size of icons in IceWM preferences.
 There are four relevant options:
+
 ```
-MenuIconSize=16
-SmallIconSize=16
-LargeIconSize=32
-HugeIconSize=48
+    MenuIconSize=16
+    SmallIconSize=16
+    LargeIconSize=32
+    HugeIconSize=48
 ```
+
 These values are default but you can change them to whatever you want.
 `MenuIconSize` specifies size of icons in menu. Three other are used for
 any other icon in IceWM. E.g. `SmallIconSize` is used in taskbar,
@@ -965,7 +948,8 @@ and frames will not change their high accordingly! Also when you specify the siz
 that is not available, then icons will be resize - this can cause some disturbance
 mainly when you are using xpm icons.
 
-There is a trick to increase size of taskbar however. Taskbar height is sized according
+There is a trick to increase size of taskbar however.
+Taskbar height is sized according
 size of start button. E.g. for linux if your `linux.xpm` in taskbar
 folder is 50x32 then your taskbar will be 32 pixels high.
 
@@ -990,7 +974,7 @@ If you want to test file yourself you can add this file
 into `po` directory under IceWM sources and then configure IceWM
 (`./configure`) and type `make` in `po` directory.
 This creates .mo file, which you can either copy to locale locations
-(e.g. /usr/local/share/locale/cs/LC_MESSAGES) or you can do `make install`.
+(e.g. /usr/local/share/locale/cs/LC\_MESSAGES) or you can do `make install`.
 
 ### How to use Xrandr?
 
@@ -1001,28 +985,28 @@ X11 and IceWM that supports xrandr. You can run `xrandr -q` to see the
 resolutions supported using your present X configuration (maximum
 resolution and color depth). You can edit this menu fragment when you
 have checked which resolutions work and then you can put it into your
-`./icewm/toolbar` file
+[toolbar](https://ice-wm.org/man/icewm-toolbar).
 
 ```
-# IceWM toolbar menu to change the display resolution.
-# This needs xrandr support from both X11 and Icewm.
-#
-# Xrandr is considered an experimental feature, so your screen may go
-# blank if you have a problem with some resolution setting.
-# It is a good idea to close your other windows before testing.
-#
-# Check your own resolutions with xrandr -q and modify accordingly.
-# This example assumes a default resolution of 1280x1024.
-#
+    # IceWM toolbar menu to change the display resolution.
+    # This needs xrandr support from both X11 and Icewm.
+    #
+    # Xrandr is considered an experimental feature, so your screen may go
+    # blank if you have a problem with some resolution setting.
+    # It is a good idea to close your other windows before testing.
+    #
+    # Check your own resolutions with xrandr -q and modify accordingly.
+    # This example assumes a default resolution of 1280x1024.
+    #
 
 
-menu Resolution redhat-system-settings {
-   prog 1280x1024 1280x1024 xrandr -s 0
-   prog 1152x864  1152x864  xrandr -s 2
-   prog 1024x768  1024x768  xrandr -s 3
-   prog  800x600   800x600  xrandr -s 4
-   prog  640x480   640x480  xrandr -s 5
-}
+    menu Resolution redhat-system-settings {
+       prog 1280x1024 1280x1024 xrandr -s 0
+       prog 1152x864  1152x864  xrandr -s 2
+       prog 1024x768  1024x768  xrandr -s 3
+       prog  800x600   800x600  xrandr -s 4
+       prog  640x480   640x480  xrandr -s 5
+    }
 ```
 
 The redhat-system-settings is a bitmap I picked up from my Fedora Core 3
@@ -1033,104 +1017,99 @@ box, you can put there whatever you want of course.
 ### Example: configuration A-Z
 
 
-This is sample of possible configuration you need to do to have IceWM
-running with all you need. Following applies for RedHat(9). Placement of files can be
-bit different.
+This is a sample of possible configurations you could do to have IceWM
+running with all you need. Following applies for RedHat(9).
+Placement of files can be bit different.
 
 ### X window login
 
-To have possibility to switch to IceWM  in GDM greeter (after start to runlevel 5 = Xwindow),
+To have possibility to switch to IceWM  in GDM greeter
+(after start to runlevel 5 = Xwindow),
 then you need to do following things:
 
 
-- Add to `/etc/X11/gdm/Sessions/` (gdm is default greeter) file `IceWM` with content
-```
-  #!/bin/bash
-  exec /etc/X11/xdm/Xsession icewm
+- Add to `/etc/X11/gdm/Sessions/` (gdm is default greeter)
+  file `IceWM` with content:
+
+```bash
+    #!/bin/bash
+    exec /etc/X11/xdm/Xsession icewm
 ```
 
-- Modify `/etc/X11/xdm/Xsession` to understand what "icewm" is (this is not necessary)
-- Add to `/usr/share/apps/switchdesk/` file `Xclients.icewm` with content
-```
-  #!/bin/bash
-  exec /usr/local/bin/icewm-session
-```
+- Modify `/etc/X11/xdm/Xsession` to understand what "icewm"
+  is (this may not be necessary).
 
+- Add to `/usr/share/apps/switchdesk/` file `Xclients.icewm` with content:
+
+```bash
+    #!/bin/bash
+    exec /usr/local/bin/icewm-session
+```
 
 
 ### IceWM configuration
 
+
 To configure all of IceWM options go to sections about configuration.
 Generally all you need to customize IceWM globaly, is to edit `/usr/local/share/icewm/preferences` etc.
 
+
 ### Icons on desktop
 
-Usually people want to have icons on desktop. One of most simple applications that can
-satisfy this need is `idesk` (see Tools to find it). I personaly recommend
-to use 0.3.x version - this has almost no requirements and is really simple.
 
-Configuration of idesk is almost as easy as configuration of IceWM, but has one disadvantage:
-idesk does not have in version 0.3.x global configuration file - therefore each user needs to
-have proper configuration file in his/her home.
+Usually people want to have icons on desktop.
+One of most simple applications that can
+satisfy this need is `idesk` (see Tools to find it).
+Configuration of idesk is almost as easy as configuration
+of IceWM, but has one disadvantage:
+idesk does not have in version 0.3.x global configuration file.
+Therefore each user needs to have proper configuration
+file in his/her home.
 
 To configure idesk you need to:
 
 - Add `~/.ideskrc` file with content like this
+
 ```
-table Config
-  FontName: Helvetica
-  FontSize: 9
-  FontColor: #ffffff
-  PaddingX: 35
-  PaddingY: 25
-  Locked: true
-  HighContrast: false
-  Transparency: 50
-  Shadow: true
-  ShadowColor: #000000
-  ShadowX: 1
-  ShadowY: 1
-  Bold: false
-end
+    table Config
+      FontName: Helvetica
+      FontSize: 9
+      FontColor: #ffffff
+      PaddingX: 35
+      PaddingY: 25
+      Locked: true
+      HighContrast: false
+      Transparency: 50
+      Shadow: true
+      ShadowColor: #000000
+      ShadowX: 1
+      ShadowY: 1
+      Bold: false
+    end
 ```
 
 - Add `~/.idesktop` directory
+
 - Add `whatever.lnk` files into it, with content like this
 
 ```
-table Icon
-  Caption: Mozilla
-  Command: mozilla
-  Icon: /usr/share/pixmaps/mozilla-icon.png
-  X: 22
-  Y: 13
-end
+    table Icon
+      Caption: Mozilla
+      Command: mozilla
+      Icon: /usr/share/pixmaps/mozilla-icon.png
+      X: 22
+      Y: 13
+    end
 ```
 
 - Do not forget you need to start idesk at the beginning of the session.
   Best to achieve this is using your `~/.icewm/startup` file (for details see Configuration section).
   In case of idesk you can add line:
-```
-idesk > /dev/null & # start idesk - desktop icon manager
-```
 
-
-### Control tools
-
-To have some "control center" like application you can use Vadim A. Khohlov's `icecc` -
-IceWM Control center. (see Tools to find it) His utility is also very simple, fast and has editors
-for all of the IceWM options.
-
-To integrate it into menu you have to edit `/usr/local/share/icewm/menu` and add there line like this
-```
-prog "Control Center" "icecc_icon" icecc
+```bash
+    idesk > /dev/null & # start idesk - desktop icon manager
 ```
 
-Please note that icecc needs some other programs like gvim and python to work properly.
-
-This section is a collection of tools that simplify the usage of
-IceWM. Head on over to the utilities section of the IceWM homepage if you
-want an up to date overview about all available tools.
 
 ### IceWM ignores my colors
 
@@ -1166,71 +1145,22 @@ you are running X in n-bit mode (n typically is 8, 16, 24 or 32).
 ### Programs are missing from menus
 
 
-A very annoying problem are programs you added to the
-`menu` file but
+A very annoying problem are programs you added to the `menu` file but
 that are missing in the corresponding menus. That isn't really a bug
 of IceWM. The point of view of IceWM is that it makes no sense to
-display a program that *are not present.*
+display a program that *is not present*.
 
-The crucial point is the meaning of *"to be
-present".* It does not mean *"to be
-installed"* but *"to be found using the present
-path"* (*echo $PATH* or *which program* to find if program is in
-PATH).
+The crucial point is the meaning of *to be present*.  It does not
+mean *to be installed*, but *to be found using the present path*.
+Do `echo $PATH` or `which program` to find if a program is in PATH.
 
 To fix the problem you have at least three possibilities:
 
 
 1.  You give the full path and not only the program name itself.
-2.  You set the path in your `.xinitrc`, `.xsession` or `.Xclients`.
-3.  You use a wrapper script for running IceWM.
+2.  You set the PATH in your `.xinitrc`, `.xsession` or `.Xclients`.
+3.  You set the PATH in [env](https://ice-wm.org/man/icewm-env).
 
-
-The first two solutions are straightforward. Using a wrapper script
-is a bit tricky therefore I'll describe how to do it.
-
-Become root and move `icewm` to
-`icewm.bin.`
-
-```
-    mv /usr/local/bin/icewm /usr/local/bin/icewm.bin
-```
-
-Edit `icewm` so that it reads something like this:
-
-```
-    #!/bin/sh
-
-    PATH=<what the path shall be>
-    export $PATH
-
-    exec icewm.bin $*
-```
-
-It is very important to add the `"$*".` Otherwise
-all command line arguments (such as *"use another
-theme")* will be ignored.
-
-**Hint:** Using `bash`, `ksh` and
-`zsh` you can contract
-
-```
-    PATH=<what the path shall be>
-    export $PATH
-```
-
-into
-
-```
-    export PATH=<what the path shall be>
-```
-
-You could also **add** directories to the path (instead of
-simply overwriting it). To do this you use
-
-```
-    PATH=$PATH:<what shall be added>
-```
 
 ### IceWM maximizes windows over the GNOME panel
 
@@ -1248,7 +1178,7 @@ in your `winoptions` file.
 
 
 The reason for this is that the standard lock command
-(`xlock`) could not be found by IceWM.
+(`xscreensaver-command` or `xlock`) could not be found by IceWM.
 See "Setting the lock command" for details on setting
 a different lock command.
 
