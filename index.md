@@ -1221,6 +1221,11 @@ or by XFS (X Font Server) defined in. `/etc/X11/fs/config`.
 Set `ConsiderSizeHintsMaximized=0`.
 
 
+### How can I disable the Super keys, which open the WindowList or Menu?
+
+Set `Win95Keys=0`.
+
+
 ### License
 
 
