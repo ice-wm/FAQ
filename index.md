@@ -286,6 +286,7 @@ corresponding menu is bound according to the following scheme:
     -----------------------------
 ```
 
+
 ### Monitor mailboxes?
 
 
@@ -295,9 +296,11 @@ No problem. See
 ### Disable the Alt keys?
 
 
-To send all Alt+key keys to application you can use window option `window_class.fullKeys: 1`
-However the preference you looking is `ClientWindowMouseActions=0`. This disable
-Alt+mouse drag to move window for all IceWM handled windows.
+To send all Alt key combinations to an application,
+you can use window option `window_class.fullKeys: 1`
+
+The preference you are looking for is `ClientWindowMouseActions=0`.
+This disables Alt+mouse drag to move window for all IceWM handled windows.
 
 
 ### Control Applications
@@ -833,6 +836,23 @@ a modifier (from Marco Molteni):
    window manager, `~/.xinit` or `~/.xsession`, or
    in [startup](https://ice-wm.org/man/icewm-startup)
 
+
+### Setting the lock command
+
+To set the lock command, add
+
+```
+    LockCommand="xlock -mode blank"
+```
+
+to your `$HOME/.icewm/preferences` and xlock will run in blank mode.
+
+In case you prefer xscreensaver
+
+```
+    LockCommand="xscreensaver 2>/dev/null; sleep 1; xscreensaver-command -lock"
+```
+
 ### How to lock the screen
 
 
@@ -853,25 +873,23 @@ With IceWM screen locking is very easy: If you press
 a menu pops up offering you the following tasks:
 
 
-- Loc`k` Workstation
-- `S`leep mode
-- `C`ancel
-- `L`ogout
-- Re`b`oot
-- Shut`d`own
-- `W`indow List
-- `R`estart icewm
-- `A`bout
+- Loc*k* Workstation
+- *S*leep mode
+- *C*ancel
+- *L*ogout
+- Re*b*oot
+- Shut*d*own
+- *W*indow List
+- *R*estart icewm
+- *A*bout
 
 
-The letters that are emphasized in this FAQ are underlined in real
-life. The meaning of this emphasis is that you may e. g. press
+The letters that are emphasized are underlined in the dialog.
+The meaning of this emphasis is that you may e. g. press
 `k` to lock your workstation.
 
-Another possibility (this is the one I prefer because I once to often
-pressed `L` in order to lock my machine) is to
-press `Enter`. The result is the same because the
-button that is active by default is *Lock Workstation*.
+Another possibility is to use the arrow keys to navigate and
+then press `Enter` to activate the task.
 
 ### ... by mouse
 
@@ -1224,6 +1242,11 @@ Set `ConsiderSizeHintsMaximized=0`.
 ### How can I disable the Super keys, which open the WindowList or Menu?
 
 Set `Win95Keys=0`.
+
+
+### How can IceWM load new keybindings from .icewm/keys without a restart?
+
+Do `icesh keys`.
 
 
 ### License
