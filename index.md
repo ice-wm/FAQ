@@ -297,9 +297,14 @@ No problem. See
 
 
 To send all Alt key combinations to an application,
-you can use window option `window_class.fullKeys: 1`
+you can use a [window option](https://ice-wm.org/man/icewm-winoptions)
 
-The preference you are looking for is `ClientWindowMouseActions=0`.
+```
+window_class.fullKeys: 1
+```
+
+The [preference](https://ice-wm.org/man/icewm-preferences)
+you are looking for is `ClientWindowMouseActions=0`.
 This disables Alt+mouse drag to move window for all IceWM handled windows.
 
 
