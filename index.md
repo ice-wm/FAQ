@@ -86,6 +86,9 @@ If you use `startx` to run X11 then create a `~/.xinitrc`:
 Do `chmod +x ~/.xinitrc`. If you use Xdm then link:
 `ln ~/.xinitrc ~/.xsession`.
 
+The WDM display manager examines `~/.wmrc`.
+Do `echo icewm-session >~/.wmrc`.
+
 Any startup commands for your IceWM session go into the
 [icewm startup file](https://ice-wm.org/man/icewm-startup).
 

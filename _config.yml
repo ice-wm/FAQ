@@ -1,2 +1,7 @@
 theme: jekyll-theme-midnight
+title: "IceWM FAQ and Howto"
 show_downloads: false
+description: ""
+baseurl: "/FAQ/"
+url: "https://ice-wm.org"
+github_username: ice-wm
