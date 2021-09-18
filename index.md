@@ -982,7 +982,9 @@ To change the height of frames you have to make theme with higher frames.
 
 The best option is to join
 [openSUSE Weblate](https://l10n.opensuse.org/projects/icewm/icewm-1-4-branch/).
-First [register an account](https://l10n.opensuse.org/accounts/register/),
+First register an account either
+[here](https://l10n.opensuse.org/accounts/register/) or
+[there](https://idp-portal.suse.com/univention/self-service/#page=createaccount)
 then improve the translation for your language.
 
 
