@@ -987,14 +987,10 @@ First register an account either
 [there](https://idp-portal.suse.com/univention/self-service/#page=createaccount)
 then improve the translation for your language.
 
-
 The other option is to create a copy of `icewm.pot` and rename it to
 `cs.po` or whatever is right for your language.
 Then you have to translate the file using any of the tools for
 gettext file transaltion, e.g. kbabel, or you can edit it by hand.
-After translation you can send it to icewm-devel list or post it
-as patch in patch tracker.
-
 
 If you want to test file yourself you can add this file
 into `po` directory under IceWM sources and then configure IceWM
