@@ -509,20 +509,18 @@ to a certain desktop. All you have to do is press the
 ### Command Line Interface
 
 
-You should run IceWM with `TaskBarDoubleHeigth=1`,
-because that will enable the *Address Bar*
+You could run IceWM with `TaskBarDoubleHeigth=1`,
+if you want to enable the *Address Bar* permanently.
 (see *What is the blank bar in the task bar good for?*).
-This is especially useful if you rather frequently need to access
-man pages and don't want to have `xman` hang around all the time.
 
 If you enter `man perl` in the *Address Bar* and press
 `Ctrl+Enter` a terminal will pop up displaying the
 Perl man page. If you press `q` not only the
-man page no longer is displayed but the XTerm will terminate, too.
+man page no longer is displayed but the terminal will exit, too.
 
-This is just one example of how to use the CLI. You can use
+This is just one example of how to use the CLI in icewm. You can use
 it to issue any other command as well. A problem that might occur is
-that the XTerm will terminate before you had time to read the output
+that the terminal will exit before you had time to read the output
 of a command (it terminates as soon as the command is done).
 The terminal may support a **hold** resource or `-hold` option,
 which will keep the terminal open until it is closed by you.
@@ -769,7 +767,7 @@ and can be queried by `icewm --directories`.
 
 
 There is documentation on [themes](https://ice-wm.org/themes/)
-written by MJ Ray and update by Adam Pribyl.
+written by MJ Ray with updates from Adam Pribyl.
 
 
 ### What is the Logout Command?
@@ -792,11 +790,10 @@ inside the field and enter `xclock` the X clock is
 started.
 
 If you click on it and simply press `Ctrl+Enter`
-an XTerm is being started.
+a terminal is started.
 
-If you enter a non-X command and press
-`Ctrl+Enter` an that command is being executed in
-an XTerm.
+If you enter a non-X command and press `Ctrl+Enter` then
+that command is executed in a terminal.
 
 ### Stop grabbing my keystrokes
 
@@ -887,9 +884,12 @@ a menu pops up offering you the following tasks:
 - *L*ogout
 - Re*b*oot
 - Shut*d*own
+- *H*ibernate
 - *W*indow List
 - *R*estart icewm
 - *A*bout
+- Reload win*o*ptions
+- Reload ke*y*s
 
 
 The letters that are emphasized are underlined in the dialog.
@@ -934,10 +934,11 @@ window manager instead of the default GNOME/KDE window manager.
 ### Can I have icons on the desktop?
 
 
-Sure, but not from IceWM. Again, this is desktop environment work, but
+This is desktop environment work, but
 usually done by the respective file managers, since they already know about
 MIME types, file endings and such. IceWM users usually use
 `idesk`, `dfm`, `rox`, `kfm` or `gmc`.
+Set MinimizeToDesktop=1 for icons on the desktop from minimized applications.
 
 ### My background is ignored?
 
@@ -946,6 +947,7 @@ IceWM is compiled only with libXpm.
 With imlib, IceWM is able to read most of the often used image
 formats like png, gif, jpeg, instead of just xpm images with libXpm. Another
 reason can be, that the theme defines another image or color.
+An error message from icewmbg should tell you more.
 
 ### Can I have bigger icons?
 
@@ -990,7 +992,7 @@ then improve the translation for your language.
 The other option is to create a copy of `icewm.pot` and rename it to
 `cs.po` or whatever is right for your language.
 Then you have to translate the file using any of the tools for
-gettext file transaltion, e.g. kbabel, or you can edit it by hand.
+gettext file translation, e.g. kbabel, or you can edit it by hand.
 
 If you want to test file yourself you can add this file
 into `po` directory under IceWM sources and then configure IceWM
