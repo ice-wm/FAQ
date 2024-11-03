@@ -951,8 +951,8 @@ An error message from icewmbg should tell you more.
 
 ### Can I have bigger icons?
 
-From IceWM 1.2.14 it is possible to specify size of icons in IceWM preferences.
-There are four relevant options:
+Since IceWM 1.2.14 it is possible to specify the size of icons in the IceWM
+preferences.  There are four relevant options:
 
 ```
     MenuIconSize=16
@@ -961,23 +961,24 @@ There are four relevant options:
     HugeIconSize=48
 ```
 
-These values are default but you can change them to whatever you want.
+These values are the default. They should be between 8 and 128 included.
 `MenuIconSize` specifies size of icons in menu. Three other are used for
 any other icon in IceWM. E.g. `SmallIconSize` is used in taskbar,
 application frames and window list. `LargeIconSize` is used in quickswitch.
 
-You have to take in mind that when you change size of `SmallIconsSize`
-then all above described parts will have icons of different size, but taskbar
-and frames will not change their high accordingly! Also when you specify the size
-that is not available, then icons will be resize - this can cause some disturbance
-mainly when you are using xpm icons.
+Consider that when you change size of `SmallIconsSize`, then all above
+described parts will have icons of different size, but taskbar
+and frames will not change their high accordingly!
+Also when you specify the size that is not available, icons will be resized.
+This can cause some artefacts mainly when you are using xpm icons.
 
-There is a trick to increase size of taskbar however.
-Taskbar height is sized according
-size of start button. E.g. for linux if your `linux.xpm` in taskbar
-folder is 50x32 then your taskbar will be 32 pixels high.
+There is a trick to increase size of taskbar, however.
+The taskbar height is set to SmallIconSize + 9 pixels.
+Only if the `start.xpm` icon is higher than this,
+will it be set to the height of `start.xpm` + 5 pixels.
 
-To change the height of frames you have to make theme with higher frames.
+To change the height of frames you have to make a theme
+with higher frame pixmaps.
 
 
 ### How to translate IceWM?
