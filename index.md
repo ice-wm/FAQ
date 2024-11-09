@@ -2,7 +2,7 @@
 title: IceWM FAQ and Howto
 ---
 
-Last modified 2020/03/21
+Last modified: 2024/11/09.
 
 ### What is IceWM?
 
@@ -449,7 +449,7 @@ taskbar looking like this:
     +---+---+---+---+---+---+---+---+---+---+
 ```
 
-If you name less desktops you obtain less if you name more you get
+If you name less desktops, you obtain less. If you name more, you get
 more.
 
 For understanding how switching virtual desktops works in IceWM you
@@ -569,6 +569,10 @@ IceWM can be customized using a great variety of themes.
 You can download them from
 [https://www.box-look.org/](https://www.box-look.org/browse/cat/142/ord/latest/).
 To install themes simply unpack them into your `~/.icewm/themes/` directory.
+
+Since 3.5.0 icewm can install themes from the extra package with the
+`-i`, `--install` option. Do `icewm -i list` for a list of 92
+installable themes.
 
 ### Which image formats?
 
